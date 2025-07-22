@@ -46,26 +46,26 @@ async function buildEmbed() {
     on,
   } = await res.json();
 
-  // Monta os campos, removendo os desnecessários e formatando conforme solicitado
-  const fields = [
-    { name: "Game", value: String(game).toUpperCase(), inline: true },
-    { name: "Local", value: formatLocation(location), inline: true },
-    { name: "Status", value: on ? "Online" : "Offline", inline: true },
-    ...status
-      .filter(
-        (s) =>
-          s.key !== "Players" && // Remove campo Players
-          s.value !== "0" &&     // Remove campos com valor 0
-          s.value !== 0
-      )
-      .map((s) => ({
-        name: s.key,
-        value: s.value,
-        inline: true,
-      })),
-    // Adiciona o campo copypaste ao final
-    { name: "Conectar", value: "`connect lanches.dat.gg:25403`", inline: false },
-  ];
+const fields = [
+  { name: "Game", value: String(game).toUpperCase(), inline: true },
+  { name: "Local", value: formatLocation(location), inline: true },
+  { name: "Status", value: on ? "Online" : "Offline", inline: true },
+  ...status
+    .filter(
+      (s) =>
+        s.key !== "Players" &&
+        s.value !== "0" &&
+        s.value !== 0
+    )
+    .map((s) => ({
+      name: s.key,
+      value: s.value,
+      inline: true,
+    })),
+  // Adiciona o campo Last Update antes do campo Conectar
+  { name: "Last Update", value: `<t:${Math.floor(Date.now() / 1000)}:R>`, inline: false },
+  { name: "Conectar", value: "`connect lanches.dat.gg:25403`", inline: false },
+];
 
   // Define a cor do embed conforme o status
   const embedColor = on ? "Green" : "Red";
