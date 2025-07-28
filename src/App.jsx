@@ -152,9 +152,13 @@ function App() {
       console.error("Erro ao buscar dados do servidor:", err);
 
       // Em produção, se falhar por CORS, usar dados de demonstração
-      if (!import.meta.env.DEV && (err.message.includes("CORS") || err.message.includes("Failed to fetch"))) {
+      if (
+        !import.meta.env.DEV &&
+        (err.message.includes("CORS") ||
+          err.message.includes("Failed to fetch"))
+      ) {
         console.log("Usando dados de demonstração para GitHub Pages...");
-        
+
         const mockData = {
           name: "Lanchonete Server",
           game: "CS2",
@@ -164,10 +168,10 @@ function App() {
             { key: "FPS", value: "128" },
             { key: "Tick Rate", value: "128" },
             { key: "Current Map", value: "de_dust2" },
-            { key: "Max Players", value: "10" }
-          ]
+            { key: "Max Players", value: "10" },
+          ],
         };
-        
+
         setServerData(mockData);
         setLastUpdate(formatLastUpdate());
         return;
