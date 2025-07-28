@@ -10,12 +10,60 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%, #000000 100%);
+  background-size: 400% 400%;
+  animation: darkGradientShift 30s ease infinite;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 50px 80px, rgba(255, 215, 0, 0.8), transparent),
+    radial-gradient(1px 1px at 150px 40px, rgba(255, 215, 0, 0.6), transparent),
+    radial-gradient(1px 1px at 280px 120px, rgba(255, 215, 0, 0.7), transparent),
+    radial-gradient(1px 1px at 420px 60px, rgba(255, 215, 0, 0.5), transparent),
+    radial-gradient(1px 1px at 320px 200px, rgba(255, 215, 0, 0.9), transparent),
+    radial-gradient(1px 1px at 80px 180px, rgba(255, 215, 0, 0.4), transparent),
+    radial-gradient(1px 1px at 220px 300px, rgba(255, 215, 0, 0.6), transparent),
+    radial-gradient(1px 1px at 380px 250px, rgba(255, 215, 0, 0.8), transparent);
+  background-repeat: repeat;
+  background-size: 500px 400px;
+  animation: goldenDotsFloat 25s linear infinite;
+  pointer-events: none;
+  z-index: -2;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 180px 150px, rgba(255, 215, 0, 0.5), transparent),
+    radial-gradient(1px 1px at 360px 90px, rgba(255, 215, 0, 0.7), transparent),
+    radial-gradient(1px 1px at 120px 280px, rgba(255, 215, 0, 0.4), transparent),
+    radial-gradient(1px 1px at 480px 180px, rgba(255, 215, 0, 0.6), transparent),
+    radial-gradient(1px 1px at 40px 320px, rgba(255, 215, 0, 0.8), transparent),
+    radial-gradient(1px 1px at 300px 30px, rgba(255, 215, 0, 0.5), transparent);
+  background-repeat: repeat;
+  background-size: 520px 380px;
+  animation: goldenDotsFloat2 20s linear infinite, goldenDotsBlink 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .app {
@@ -85,6 +133,66 @@ body {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(50, 205, 50, 0);
+  }
+}
+
+@keyframes darkGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes goldenDotsFloat {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+  25% {
+    transform: translateX(-20px) translateY(-15px);
+  }
+  50% {
+    transform: translateX(15px) translateY(-25px);
+  }
+  75% {
+    transform: translateX(-10px) translateY(20px);
+  }
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+@keyframes goldenDotsFloat2 {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+  33% {
+    transform: translateX(25px) translateY(10px);
+  }
+  66% {
+    transform: translateX(-15px) translateY(30px);
+  }
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+@keyframes goldenDotsBlink {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 1;
   }
 }
 
