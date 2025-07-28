@@ -86,15 +86,6 @@ function App() {
     SERVER_IP: import.meta.env.VITE_SERVER_IP || "lanches.dat.gg:26088",
   };
 
-  // Debug: verificar se as variáveis foram carregadas
-  console.log("Config loaded:", {
-    hasEmail: !!config.DAT_HOST_EMAIL,
-    hasPassword: !!config.DAT_HOST_PASSWORD,
-    hasServerId: !!config.TRACK_SERVER_ID,
-    interval: config.TRACK_INTERVAL_SEC,
-    serverIp: config.SERVER_IP,
-  });
-
   // Verificar se as configurações necessárias estão presentes
   const isConfigured =
     config.DAT_HOST_EMAIL && config.DAT_HOST_PASSWORD && config.TRACK_SERVER_ID;
@@ -117,21 +108,34 @@ function App() {
 
       console.log("Fazendo requisição para DatHost...");
 
-      // URL para requisição (usa proxy em desenvolvimento)
+      // URL para requisição (usa proxy em desenvolvimento e produção)
       const isDev = import.meta.env.DEV;
-      const apiUrl = isDev
-        ? `/api/0.1/game-servers/${config.TRACK_SERVER_ID}`
-        : `https://dathost.net/api/0.1/game-servers/${config.TRACK_SERVER_ID}`;
 
-      console.log("URL da requisição:", apiUrl, "(dev mode:", isDev, ")");
+      let apiUrl;
+      let headers;
 
-      const response = await fetch(apiUrl, {
-        method: "GET",
-        headers: {
+      if (isDev) {
+        // Desenvolvimento: usa proxy do Vite
+        apiUrl = `/api/0.1/game-servers/${config.TRACK_SERVER_ID}`;
+        headers = {
           Authorization: `Basic ${dhToken}`,
           Accept: "application/json",
           "Content-Type": "application/json",
-        },
+        };
+      } else {
+        // Produção: usar um proxy CORS diferente
+        apiUrl = `https://corsproxy.io/?${encodeURIComponent(
+          `https://dathost.net/api/0.1/game-servers/${config.TRACK_SERVER_ID}`
+        )}`;
+        headers = {
+          Authorization: `Basic ${dhToken}`,
+          Accept: "application/json",
+        };
+      }
+
+      const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: headers,
         mode: "cors",
       });
 
@@ -144,7 +148,6 @@ function App() {
       }
 
       const data = await response.json();
-      console.log("Dados recebidos:", data);
 
       setServerData(data);
       setLastUpdate(formatLastUpdate());
