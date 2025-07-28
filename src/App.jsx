@@ -77,6 +77,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(null);
+  const [countdown, setCountdown] = useState(30); // Contador regressivo
 
   // Configurações do ambiente (equivalente às variáveis do .env)
   const config = {
@@ -177,11 +178,12 @@ function App() {
   useEffect(() => {
     if (isConfigured) {
       fetchServerData();
+      setCountdown(Number(config.TRACK_INTERVAL_SEC)); // Reseta countdown
 
-      const interval = setInterval(
-        fetchServerData,
-        Number(config.TRACK_INTERVAL_SEC) * 1000
-      );
+      const interval = setInterval(() => {
+        fetchServerData();
+        setCountdown(Number(config.TRACK_INTERVAL_SEC)); // Reseta countdown a cada busca
+      }, Number(config.TRACK_INTERVAL_SEC) * 1000);
 
       return () => clearInterval(interval);
     } else {
@@ -189,9 +191,21 @@ function App() {
     }
   }, [isConfigured]);
 
+  // Efeito para countdown regressivo
+  useEffect(() => {
+    if (isConfigured && countdown > 0) {
+      const countdownInterval = setInterval(() => {
+        setCountdown(prev => prev > 0 ? prev - 1 : 0);
+      }, 1000);
+
+      return () => clearInterval(countdownInterval);
+    }
+  }, [isConfigured, countdown]);
+
   // Função para recarregar manualmente
   const handleRefresh = () => {
     setLoading(true);
+    setCountdown(Number(config.TRACK_INTERVAL_SEC)); // Reseta countdown
     fetchServerData();
   };
 
@@ -217,11 +231,11 @@ function App() {
 
           // Fallback: tenta os caminhos considerando GitHub Pages
           console.log("Tentando fallback para GitHub Pages...");
-          
+
           // Detecta se está em produção (GitHub Pages) ou desenvolvimento
           const isDev = import.meta.env.DEV;
           const basePath = isDev ? "" : "/botlanchonete";
-          
+
           const audio2 = new Audio(`${basePath}/audio/c4.mp3`);
           audio2.volume = 0.2; // Mesmo volume no fallback
 
@@ -232,14 +246,19 @@ function App() {
             })
             .catch((error2) => {
               console.log("❌ Fallback também falhou:", error2);
-              
+
               // Último fallback: tenta URL completa
-              const audio3 = new Audio(`${window.location.origin}${basePath}/audio/c4.mp3`);
+              const audio3 = new Audio(
+                `${window.location.origin}${basePath}/audio/c4.mp3`
+              );
               audio3.volume = 0.2;
-              
-              audio3.play()
+
+              audio3
+                .play()
                 .then(() => console.log("✅ URL completa funcionou!"))
-                .catch((error3) => console.log("❌ Todos os métodos falharam:", error3));
+                .catch((error3) =>
+                  console.log("❌ Todos os métodos falharam:", error3)
+                );
             });
         });
     } catch (error) {
@@ -338,7 +357,7 @@ function App() {
     <div className="app">
       <div className={`server-card ${on ? "" : "server-card-offline"}`}>
         <h1 className="server-title">
-          🖥️ {name}
+          🖥️ CS Mix Lanches
           <span
             className={`status-indicator ${
               on ? "status-online" : "status-offline"
@@ -372,13 +391,11 @@ function App() {
             </div>
           ))}
 
-          {/* Card de Última Atualização */}
-          {lastUpdate && (
-            <div className={`info-item ${on ? "" : "info-item-grayed"}`}>
-              <div className="info-label">Última Atualização</div>
-              <div className="info-value">{lastUpdate}</div>
-            </div>
-          )}
+          {/* Card de Contagem Regressiva */}
+          <div className={`info-item ${on ? "" : "info-item-grayed"}`}>
+            <div className="info-label">Atualiza em:</div>
+            <div className="info-value">{countdown}s</div>
+          </div>
         </div>
 
         {/* Seção do Mapa */}
@@ -459,7 +476,7 @@ function App() {
             onClick={() =>
               window.open("https://lanchonetemix.ct.ws/", "_blank")
             }
-            title="SKINS - Lanchonete Mix"
+            title="SKINS - CS Mix Lanches"
           >
             SKINS
           </button>
@@ -478,10 +495,6 @@ function App() {
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
             </svg>
           </button>
-        </div>
-
-        <div style={{ marginTop: "15px", fontSize: "0.8em", color: "#ffd700" }}>
-          Atualiza automaticamente a cada {config.TRACK_INTERVAL_SEC}s
         </div>
       </div>
     </div>
