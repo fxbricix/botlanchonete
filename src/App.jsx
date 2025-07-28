@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
+import c4Sound from "./c4.mp3"; // Importa o áudio
 
 // Função para formatar o local (igual ao bot original)
 function formatLocation(loc) {
@@ -196,8 +197,60 @@ function App() {
 
   // Função para conectar via Steam
   const handleConnectSteam = () => {
-    const steamUrl = `steam://run/730//+connect ${config.SERVER_IP}`;
-    window.open(steamUrl, "_blank");
+    console.log("Botão CONECTAR STEAM clicado!"); // Debug
+
+    // Toca o som c4.mp3 usando import (funciona em dev e produção)
+    try {
+      const audio = new Audio(c4Sound);
+      audio.volume = 0.2; // Volume baixo (20%)
+
+      console.log("Tentando reproduzir áudio importado..."); // Debug
+
+      // Força a reprodução
+      audio
+        .play()
+        .then(() => {
+          console.log("✅ Áudio reproduzido com sucesso!");
+        })
+        .catch((error) => {
+          console.log("❌ Erro ao reproduzir áudio importado:", error);
+
+          // Fallback: tenta os caminhos considerando GitHub Pages
+          console.log("Tentando fallback para GitHub Pages...");
+          
+          // Detecta se está em produção (GitHub Pages) ou desenvolvimento
+          const isDev = import.meta.env.DEV;
+          const basePath = isDev ? "" : "/botlanchonete";
+          
+          const audio2 = new Audio(`${basePath}/audio/c4.mp3`);
+          audio2.volume = 0.2; // Mesmo volume no fallback
+
+          audio2
+            .play()
+            .then(() => {
+              console.log("✅ Fallback funcionou!");
+            })
+            .catch((error2) => {
+              console.log("❌ Fallback também falhou:", error2);
+              
+              // Último fallback: tenta URL completa
+              const audio3 = new Audio(`${window.location.origin}${basePath}/audio/c4.mp3`);
+              audio3.volume = 0.2;
+              
+              audio3.play()
+                .then(() => console.log("✅ URL completa funcionou!"))
+                .catch((error3) => console.log("❌ Todos os métodos falharam:", error3));
+            });
+        });
+    } catch (error) {
+      console.log("❌ Erro ao criar objeto Audio:", error);
+    }
+
+    // Pequeno delay antes de abrir o Steam
+    setTimeout(() => {
+      const steamUrl = `steam://run/730//+connect ${config.SERVER_IP}`;
+      window.open(steamUrl, "_blank");
+    }, 100);
   };
 
   // Se não está configurado, mostrar instruções
@@ -390,19 +443,7 @@ function App() {
 
         <div className="skins-button-container">
           <button
-            className="skins-button"
-            onClick={() =>
-              window.open("https://lanchonetemix.ct.ws/", "_blank")
-            }
-            title="SKINS - Lanchonete Mix"
-          >
-            SKINS
-          </button>
-        </div>
-
-        <div className="social-buttons">
-          <button
-            className="social-button discord-button"
+            className="discord-button"
             onClick={() =>
               window.open("https://discord.gg/tmyz4wp88W", "_blank")
             }
@@ -414,7 +455,17 @@ function App() {
           </button>
 
           <button
-            className="social-button linkedin-button"
+            className="skins-button"
+            onClick={() =>
+              window.open("https://lanchonetemix.ct.ws/", "_blank")
+            }
+            title="SKINS - Lanchonete Mix"
+          >
+            SKINS
+          </button>
+
+          <button
+            className="linkedin-button"
             onClick={() =>
               window.open(
                 "https://www.linkedin.com/in/fabriciomoreirapedroso/",

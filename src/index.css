@@ -74,7 +74,7 @@ body::after {
   border: 2px solid #32cd32;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(50, 205, 50, 0.3), 0 0 20px rgba(255, 215, 0, 0.1);
-  padding: 30px;
+  padding: 20px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -197,8 +197,8 @@ body::after {
 .server-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin: 20px 0;
+  gap: 12px;
+  margin: 15px 0;
 }
 
 .info-item {
@@ -254,14 +254,14 @@ body::after {
 }
 
 .map-section {
-  margin: 20px 0;
+  margin: 15px 0;
   text-align: center;
 }
 
 .map-image {
   width: 100%;
-  max-width: 400px;
-  height: 225px;
+  max-width: 280px;
+  height: 140px;
   object-fit: cover;
   border-radius: 10px;
   border: 2px solid #32cd32;
@@ -277,8 +277,8 @@ body::after {
 
 .map-placeholder {
   width: 100%;
-  max-width: 400px;
-  height: 225px;
+  max-width: 280px;
+  height: 140px;
   background: linear-gradient(145deg, #2d2d2d 0%, #3a3a3a 100%);
   border: 2px dashed #ffd700;
   border-radius: 10px;
@@ -456,17 +456,20 @@ body::after {
   align-items: center;
 }
 
-/* Social Buttons */
-.social-buttons {
+/* Container para DISCORD - SKINS - LINKEDIN */
+.skins-button-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
   gap: 15px;
-  margin-top: 20px;
 }
 
-.social-button {
-  width: 50px;
-  height: 50px;
+/* Botão Discord - Primeiro da linha */
+.discord-button {
+  background: linear-gradient(145deg, #5865f2, #4752c4);
+  width: 45px;
+  height: 45px;
   border: none;
   border-radius: 50%;
   display: flex;
@@ -474,49 +477,41 @@ body::after {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: #2d2d2d;
   color: #ffffff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.social-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-.discord-button {
-  background: linear-gradient(145deg, #5865f2, #4752c4);
+  flex-shrink: 0;
 }
 
 .discord-button:hover {
   background: linear-gradient(145deg, #4752c4, #3c44aa);
   box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
+  transform: translateY(-3px);
 }
 
+/* Botão LinkedIn - Último da linha */
 .linkedin-button {
   background: linear-gradient(145deg, #0077b5, #005885);
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
 }
 
 .linkedin-button:hover {
   background: linear-gradient(145deg, #005885, #004a6b);
   box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+  transform: translateY(-3px);
 }
 
-.social-button svg {
-  transition: transform 0.3s ease;
-}
-
-.social-button:hover svg {
-  transform: scale(1.1);
-}
-
-/* Botão SKINS com animações coloridas */
-.skins-button-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
+/* Botão SKINS - Centro da linha */
 .skins-button {
   background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b, #eb4d4b, #6c5ce7);
   background-size: 300% 300%;
@@ -532,6 +527,24 @@ body::after {
   overflow: hidden;
   transition: all 0.3s ease;
   animation: skinsGradient 3s ease infinite, skinsTextColor 2s ease infinite;
+  flex-grow: 1;
+  max-width: 200px;
+}
+
+/* Efeitos visuais dos botões sociais */
+.discord-button svg,
+.linkedin-button svg {
+  transition: transform 0.3s ease;
+}
+
+.discord-button:hover svg,
+.linkedin-button:hover svg {
+  transform: scale(1.1);
+}
+
+/* Oculta o container social-buttons antigo */
+.social-buttons {
+  display: none;
 }
 
 .skins-button::before {
@@ -625,7 +638,7 @@ body::after {
   }
   
   .server-card {
-    padding: 20px;
+    padding: 15px;
   }
   
   .server-title {
@@ -644,17 +657,22 @@ body::after {
     min-width: unset;
   }
 
-  .social-buttons {
-    gap: 12px;
+  .skins-button-container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
   }
 
-  .social-button {
-    width: 45px;
-    height: 45px;
+  .discord-button,
+  .linkedin-button {
+    width: 40px;
+    height: 40px;
   }
 
   .skins-button {
     font-size: 1em;
     padding: 12px 20px;
+    max-width: none;
+    width: 100%;
   }
 }
