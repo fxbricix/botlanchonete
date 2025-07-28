@@ -388,6 +388,16 @@ function App() {
           </button>
         </div>
 
+        <div className="skins-button-container">
+          <button
+            className="skins-button"
+            onClick={() => window.open("https://lanchonetemix.ct.ws/", "_blank")}
+            title="SKINS - Lanchonete Mix"
+          >
+            SKINS
+          </button>
+        </div>
+
         <div className="social-buttons">
           <button
             className="social-button discord-button"

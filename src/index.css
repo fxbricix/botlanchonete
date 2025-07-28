@@ -404,6 +404,115 @@ body {
   transform: scale(1.1);
 }
 
+/* Botão SKINS com animações coloridas */
+.skins-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.skins-button {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b, #eb4d4b, #6c5ce7);
+  background-size: 300% 300%;
+  border: 3px solid transparent;
+  border-radius: 15px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: skinsGradient 3s ease infinite, skinsTextColor 2s ease infinite;
+}
+
+.skins-button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b, #eb4d4b, #6c5ce7, #ff6b6b);
+  background-size: 400% 400%;
+  border-radius: 15px;
+  z-index: -1;
+  animation: skinsBorder 4s ease infinite;
+}
+
+.skins-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+  animation-duration: 1.5s; /* Acelera a animação no hover */
+}
+
+.skins-button:active {
+  transform: scale(0.98);
+}
+
+@keyframes skinsGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes skinsBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes skinsTextColor {
+  0% {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(255, 107, 107, 0.7);
+  }
+  16.66% {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(78, 205, 196, 0.7);
+  }
+  33.33% {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(69, 183, 209, 0.7);
+  }
+  50% {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(249, 202, 36, 0.7);
+  }
+  66.66% {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(240, 147, 43, 0.7);
+  }
+  83.33% {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(235, 77, 75, 0.7);
+  }
+  100% {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(108, 92, 231, 0.7);
+  }
+}
+
 @media (max-width: 600px) {
   .server-info {
     grid-template-columns: 1fr;
@@ -436,5 +545,10 @@ body {
   .social-button {
     width: 45px;
     height: 45px;
+  }
+
+  .skins-button {
+    font-size: 1em;
+    padding: 12px 20px;
   }
 }
