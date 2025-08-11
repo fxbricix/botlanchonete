@@ -36,6 +36,7 @@ function getMapImageUrl(mapName) {
   const availableMaps = [
     "de_ancient.png",
     "de_anubis.png",
+    "de_cbble.png",
     "de_dust2.png",
     "de_inferno.png",
     "de_mirage.png",
