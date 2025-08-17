@@ -44,6 +44,7 @@ function getMapImageUrl(mapName) {
     "de_overpass.png",
     "de_train.png",
     "de_vertigo.png",
+    "de_ancient_night.png"
   ];
 
   // Normaliza o nome do mapa
