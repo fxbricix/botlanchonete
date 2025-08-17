@@ -559,13 +559,36 @@ function RankCard() {
             {ranks
               .sort((a, b) => Number(b.points) - Number(a.points))
               .slice(0, 10)
-              .map((item, idx) => (
-                <tr key={item.steam_id || idx}>
-                  <td>{item.name}</td>
-                  <td>{item.rank}</td>
-                  <td>{item.points}</td>
-                </tr>
-              ))}
+              .map((item, idx) => {
+                const isGlobalEliteTop = Number(item.points) > 6000;
+                return (
+                  <tr key={item.steam_id || idx}>
+                    <td>{item.name}</td>
+                    <td>
+                      {isGlobalEliteTop ? (
+                        <img
+                          src={"ranks/Global Elite Top.png"}
+                          alt="Global Elite Top"
+                          style={{ height: 32, verticalAlign: "middle" }}
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                          }}
+                        />
+                      ) : item.rank ? (
+                        <img
+                          src={`ranks/${item.rank}.png`}
+                          alt={item.rank}
+                          style={{ height: 32, verticalAlign: "middle" }}
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                          }}
+                        />
+                      ) : null}
+                    </td>
+                    <td>{item.points}</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       )}
