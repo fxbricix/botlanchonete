@@ -558,7 +558,7 @@ function RankCard() {
           <tbody>
             {ranks
               .sort((a, b) => Number(b.points) - Number(a.points))
-              .slice(0, 5)
+              .slice(0, 10)
               .map((item, idx) => (
                 <tr key={item.steam_id || idx}>
                   <td>{item.name}</td>
