@@ -45,7 +45,7 @@ function getMapImageUrl(mapName) {
     "de_train.png",
     "de_vertigo.png",
     "de_ancient_night.png",
-    "de_cache.png"
+    "de_cache.png",
   ];
 
   // Normaliza o nome do mapa
@@ -198,7 +198,7 @@ function App() {
   useEffect(() => {
     if (isConfigured && countdown > 0) {
       const countdownInterval = setInterval(() => {
-        setCountdown(prev => prev > 0 ? prev - 1 : 0);
+        setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
       }, 1000);
 
       return () => clearInterval(countdownInterval);
@@ -360,7 +360,7 @@ function App() {
     <div className="app">
       <div className={`server-card ${on ? "" : "server-card-offline"}`}>
         <h1 className="server-title">
-          🖥️ CS Mix Lanches
+          🖥️ {name}
           <span
             className={`status-indicator ${
               on ? "status-online" : "status-offline"
