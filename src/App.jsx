@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
+import "./rankcard.css";
 import c4Sound from "./c4.mp3"; // Importa o áudio
 
 // Função para formatar o local (igual ao bot original)
@@ -45,7 +45,7 @@ function getMapImageUrl(mapName) {
     "de_train.png",
     "de_vertigo.png",
     "de_ancient_night.png",
-    "de_cache.png"
+    "de_cache.png",
   ];
 
   // Normaliza o nome do mapa
@@ -198,7 +198,7 @@ function App() {
   useEffect(() => {
     if (isConfigured && countdown > 0) {
       const countdownInterval = setInterval(() => {
-        setCountdown(prev => prev > 0 ? prev - 1 : 0);
+        setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
       }, 1000);
 
       return () => clearInterval(countdownInterval);
@@ -360,7 +360,7 @@ function App() {
     <div className="app">
       <div className={`server-card ${on ? "" : "server-card-offline"}`}>
         <h1 className="server-title">
-          🖥️ CS Mix Lanches
+          🖥️ {name}
           <span
             className={`status-indicator ${
               on ? "status-online" : "status-offline"
@@ -504,4 +504,152 @@ function App() {
   );
 }
 
-export default App;
+// Card de ranques consultando a API PHP
+function RankCard() {
+  const [ranks, setRanks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const apiUrl = import.meta.env.VITE_PLAYER_API_URL;
+    fetch(apiUrl, { method: "GET" })
+      .then(async (res) => {
+        const text = await res.text();
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}: ${res.statusText} - ${text}`);
+        }
+        // Remove caracteres inválidos antes do JSON
+        const jsonStart = text.indexOf("[");
+        const cleanText = jsonStart >= 0 ? text.slice(jsonStart) : text;
+        try {
+          return JSON.parse(cleanText);
+        } catch (e) {
+          throw new Error(
+            `Resposta inválida da API: ${e.message} - ${cleanText}`
+          );
+        }
+      })
+      .then((data) => {
+        setRanks(Array.isArray(data) ? data : [data]);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(`Erro ao buscar dados: ${err.message}`);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div className="rank-card">
+      <h2>Tabela de Ranques</h2>
+      {loading ? (
+        <p>Carregando...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Rank</th>
+              <th>Pontos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ranks
+              .sort((a, b) => Number(b.points) - Number(a.points))
+              .slice(0, 10)
+              .map((item, idx) => {
+                const isGlobalEliteTop = Number(item.points) > 6000;
+                return (
+                  <tr key={item.steam_id || idx}>
+                    <td>{item.name}</td>
+                    <td>
+                      {isGlobalEliteTop ? (
+                        <img
+                          src={"ranks/Global Elite Top.png"}
+                          alt="Global Elite Top"
+                          style={{ height: 32, verticalAlign: "middle" }}
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                          }}
+                        />
+                      ) : item.rank ? (
+                        <img
+                          src={`ranks/${item.rank}.png`}
+                          alt={item.rank}
+                          style={{ height: 32, verticalAlign: "middle" }}
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                          }}
+                        />
+                      ) : null}
+                    </td>
+                    <td>{item.points}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      )}
+      {/* Info SVG e mensagem */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginTop: "1rem",
+          gap: "0.5rem",
+          color: "#555",
+          fontSize: "0.95rem",
+        }}
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          style={{ flexShrink: 0 }}
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="#007bff"
+            strokeWidth="2"
+            fill="#eaf4ff"
+          />
+          <rect x="11" y="10" width="2" height="7" rx="1" fill="#007bff" />
+          <rect x="11" y="7" width="2" height="2" rx="1" fill="#007bff" />
+        </svg>
+        <span>
+          Os ranques são atualizados quando os players logam, devido a isso, a
+          exibição pode estar diferente do esperado.
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// Adiciona o card de ranques ao App
+function AppWithRank() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        gap: "2rem",
+        padding: "2rem",
+      }}
+    >
+      <div style={{ flex: 1 }}>
+        <App />
+      </div>
+      <div style={{ width: 400 }}>
+        <RankCard />
+      </div>
+    </div>
+  );
+}
+
+export default AppWithRank;
