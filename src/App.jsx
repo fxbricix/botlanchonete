@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
+import "./rankcard.css";
 import c4Sound from "./c4.mp3"; // Importa o áudio
 
 // Função para formatar o local (igual ao bot original)
@@ -504,4 +504,95 @@ function App() {
   );
 }
 
-export default App;
+// Card de ranques consultando a API PHP
+function RankCard() {
+  const [ranks, setRanks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const apiUrl = import.meta.env.VITE_PLAYER_API_URL;
+    fetch(apiUrl, { method: "GET" })
+      .then(async (res) => {
+        const text = await res.text();
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}: ${res.statusText} - ${text}`);
+        }
+        // Remove caracteres inválidos antes do JSON
+        const jsonStart = text.indexOf("[");
+        const cleanText = jsonStart >= 0 ? text.slice(jsonStart) : text;
+        try {
+          return JSON.parse(cleanText);
+        } catch (e) {
+          throw new Error(
+            `Resposta inválida da API: ${e.message} - ${cleanText}`
+          );
+        }
+      })
+      .then((data) => {
+        setRanks(Array.isArray(data) ? data : [data]);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(`Erro ao buscar dados: ${err.message}`);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div className="rank-card">
+      <h2>Tabela de Ranques</h2>
+      {loading ? (
+        <p>Carregando...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Rank</th>
+              <th>Pontos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ranks
+              .sort((a, b) => Number(b.points) - Number(a.points))
+              .slice(0, 5)
+              .map((item, idx) => (
+                <tr key={item.steam_id || idx}>
+                  <td>{item.name}</td>
+                  <td>{item.rank}</td>
+                  <td>{item.points}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+// Adiciona o card de ranques ao App
+function AppWithRank() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        gap: "2rem",
+        padding: "2rem",
+      }}
+    >
+      <div style={{ flex: 1 }}>
+        <App />
+      </div>
+      <div style={{ width: 400 }}>
+        <RankCard />
+      </div>
+    </div>
+  );
+}
+
+export default AppWithRank;

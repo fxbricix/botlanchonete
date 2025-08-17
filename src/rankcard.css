@@ -1,0 +1,42 @@
+.rank-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 8px #ccc;
+  border-radius: 8px;
+  padding: 24px;
+  background: #222;
+  color: #fff;
+  font-family: inherit;
+}
+
+.rank-card h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #ffd700;
+}
+
+.rank-card table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+.rank-card th, .rank-card td {
+  border-bottom: 1px solid #444;
+  padding: 8px;
+  text-align: left;
+}
+
+.rank-card th {
+  color: #ffd700;
+  background: #222;
+}
+
+.rank-card tr:last-child td {
+  border-bottom: none;
+}
+
+.rank-card p {
+  text-align: center;
+  color: #ffd700;
+}
