@@ -5,15 +5,16 @@
 }
 
 body {
-  font-family: 'Roboto Mono', 'Courier New', monospace;
+  font-family: 'Roboto Mono';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%, #000000 100%);
+  font-family: 'Poppins';
   background-size: 400% 400%;
   animation: darkGradientShift 30s ease infinite;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 10px;
   position: relative;
@@ -94,7 +95,7 @@ body::after {
 }
 
 .server-title {
-  font-size: 1.8em;
+  font-size: 1.3em;
   margin-bottom: 20px;
   color: #32cd32;
   display: flex;
@@ -238,7 +239,7 @@ body::after {
 }
 
 .info-label {
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #ffd700;
   margin-bottom: 5px;
   font-weight: 600;
@@ -247,7 +248,7 @@ body::after {
 }
 
 .info-value {
-  font-size: 1.1em;
+  font-size: 0.95em;
   color: #32cd32;
   font-weight: bold;
   text-shadow: 0 0 5px rgba(50, 205, 50, 0.3);
@@ -286,7 +287,7 @@ body::after {
   align-items: center;
   justify-content: center;
   color: #ffd700;
-  font-size: 1.1em;
+  font-size: 0.95em;
   margin: 10px auto 0;
   flex-direction: column;
   gap: 8px;
@@ -304,7 +305,7 @@ body::after {
 }
 
 .last-update-card .info-label {
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #ffd700;
   margin-bottom: 5px;
   font-weight: 600;
@@ -313,7 +314,7 @@ body::after {
 }
 
 .last-update-card .info-value {
-  font-size: 1em;
+  font-size: 0.9em;
   color: #32cd32;
   font-weight: bold;
   text-shadow: 0 0 5px rgba(50, 205, 50, 0.3);
@@ -329,7 +330,7 @@ body::after {
 }
 
 .connect-title {
-  font-size: 1em;
+  font-size: 0.9em;
   color: #ffd700;
   margin-bottom: 10px;
   font-weight: 600;
@@ -343,7 +344,7 @@ body::after {
   padding: 12px 15px;
   border-radius: 8px;
   font-family: 'Courier New', monospace;
-  font-size: 0.95em;
+  font-size: 0.85em;
   cursor: pointer;
   transition: all 0.3s;
   user-select: all;
@@ -363,7 +364,7 @@ body::after {
   justify-content: center;
   align-items: center;
   height: 200px;
-  font-size: 1.2em;
+  font-size: 1em;
   color: #32cd32;
   text-shadow: 0 0 10px rgba(50, 205, 50, 0.5);
 }
@@ -385,7 +386,7 @@ body::after {
   border: none;
   padding: 12px 20px;
   border-radius: 8px;
-  font-size: 0.95em;
+  font-size: 0.85em;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
@@ -421,7 +422,7 @@ body::after {
   border: none;
   padding: 12px 20px;
   border-radius: 8px;
-  font-size: 0.95em;
+  font-size: 0.85em;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
@@ -518,7 +519,7 @@ body::after {
   border: 3px solid transparent;
   border-radius: 15px;
   padding: 15px 30px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   color: #fff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -642,7 +643,7 @@ body::after {
   }
   
   .server-title {
-    font-size: 1.5em;
+  font-size: 1.1em;
   }
 
   .button-container {
@@ -670,7 +671,7 @@ body::after {
   }
 
   .skins-button {
-    font-size: 1em;
+  font-size: 0.9em;
     padding: 12px 20px;
     max-width: none;
     width: 100%;
