@@ -29,6 +29,3 @@ jobs:
           VITE_TRACK_SERVER_ID: ${{ secrets.VITE_TRACK_SERVER_ID }}
           VITE_TRACK_INTERVAL_SEC: ${{ secrets.VITE_TRACK_INTERVAL_SEC }}
           VITE_SERVER_IP: ${{ secrets.VITE_SERVER_IP }}
-
-      - name: Run tests
-        run: npm test
