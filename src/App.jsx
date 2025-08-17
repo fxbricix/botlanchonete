@@ -592,6 +592,40 @@ function RankCard() {
           </tbody>
         </table>
       )}
+      {/* Info SVG e mensagem */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginTop: "1rem",
+          gap: "0.5rem",
+          color: "#555",
+          fontSize: "0.95rem",
+        }}
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          style={{ flexShrink: 0 }}
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="#007bff"
+            strokeWidth="2"
+            fill="#eaf4ff"
+          />
+          <rect x="11" y="10" width="2" height="7" rx="1" fill="#007bff" />
+          <rect x="11" y="7" width="2" height="2" rx="1" fill="#007bff" />
+        </svg>
+        <span>
+          Os ranques são atualizados quando os players logam, devido a isso, a
+          exibição pode estar diferente do esperado.
+        </span>
+      </div>
     </div>
   );
 }
