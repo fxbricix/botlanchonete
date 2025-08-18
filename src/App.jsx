@@ -511,7 +511,7 @@ function RankCard() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_PLAYER_API_URL;
+    const apiUrl = import.meta.env.VITE_PLAYER_API_URL || "https://api-tabela-mixlanches.onrender.com/";
     fetch(apiUrl, { method: "GET" })
       .then(async (res) => {
         const text = await res.text();
