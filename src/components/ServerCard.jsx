@@ -1,5 +1,5 @@
 import React from "react";
-import { isConfigured } from "../config/index";
+import { isConfigured } from "../config/index.js";
 import { useServerData } from "../hooks/useServerData.js";
 import {
   LoadingState,
