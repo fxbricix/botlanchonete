@@ -5,7 +5,18 @@
 }
 
 html {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Esconde a barra de rolagem mas mantém o scroll */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Esconde a barra de rolagem no Webkit (Chrome, Safari, Edge) */
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -20,7 +31,29 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Esconde a barra de rolagem mas mantém o scroll */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Esconde a barra de rolagem no Webkit (Chrome, Safari, Edge) */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Regra geral para esconder barras de rolagem em desktop */
+@media (min-width: 769px) {
+  /* Esconde scrollbars para todos os elementos que podem ter overflow */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 }
 
 body::before {
@@ -1044,5 +1077,46 @@ body::after {
   
   .rank-image {
     height: 24px;
+  }
+}
+
+/* Mobile scroll improvements */
+@media (max-width: 768px) {
+  body {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    /* No mobile, mostra a barra de rolagem para melhor UX */
+    scrollbar-width: auto;
+    -ms-overflow-style: auto;
+  }
+  
+  body::-webkit-scrollbar {
+    display: block;
+    width: 8px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.5);
+    border-radius: 4px;
+  }
+  
+  .main-wrapper {
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+  }
+  
+  /* Adiciona padding bottom para evitar que o conteúdo seja cortado */
+  .app-container {
+    padding-bottom: 2rem;
+  }
+  
+  /* Melhora a rolagem em touch devices */
+  .server-card, .rank-card, .hitbox-card {
+    -webkit-overflow-scrolling: touch;
   }
 }
