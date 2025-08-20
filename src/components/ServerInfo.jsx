@@ -1,5 +1,5 @@
 import React from "react";
-import { formatLocation, getRelevantStatus } from "../utils/formatters.js";
+import { formatLocation, getRelevantStatus } from "@/utils/formatters.js";
 
 /**
  * Componente para exibir informações do servidor

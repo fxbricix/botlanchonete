@@ -1,6 +1,6 @@
 import React from "react";
-import { playC4Sound } from "../services/audioService.js";
-import { config } from "../config/index.js";
+import { playC4Sound } from "@/services/audioService.js";
+import { config } from "@/config/index.js";
 
 /**
  * Componente para seção de conexão
