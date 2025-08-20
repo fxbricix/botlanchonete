@@ -7,6 +7,7 @@
   background: #222;
   color: #fff;
   font-family: inherit;
+  overflow: hidden; /* Evita overflow no card */
 }
 
 .rank-card h2 {
@@ -15,21 +16,69 @@
   color: #ffd700;
 }
 
+/* Container da tabela sem scroll horizontal */
+.table-container {
+  width: 100%;
+  overflow: visible;
+}
+
 .rank-card table {
   width: 100%;
   border-collapse: collapse;
   background: transparent;
+  font-size: 0.85rem; /* Fonte menor para economizar espaço */
+  table-layout: fixed; /* Layout fixo para controlar melhor as colunas */
 }
 
 .rank-card th, .rank-card td {
   border-bottom: 1px solid #444;
-  padding: 8px;
+  padding: 6px 4px; /* Padding menor */
   text-align: left;
+  white-space: nowrap; /* Evita quebra de linha */
+}
+
+/* Tamanhos específicos para cada coluna com porcentagens */
+.rank-card th:nth-child(1), .rank-card td:nth-child(1) { /* Nome */
+  width: 28%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-card th:nth-child(2), .rank-card td:nth-child(2) { /* Rank */
+  width: 18%;
+  text-align: center;
+}
+
+.rank-card th:nth-child(3), .rank-card td:nth-child(3) { /* Pontos */
+  width: 16%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.rank-card th:nth-child(4), .rank-card td:nth-child(4) { /* K/D */
+  width: 13%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.rank-card th:nth-child(5), .rank-card td:nth-child(5) { /* HS% */
+  width: 13%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.rank-card th:nth-child(6), .rank-card td:nth-child(6) { /* MVP */
+  width: 12%;
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .rank-card th {
   color: #ffd700;
   background: #222;
+  font-size: 0.85rem;
+  font-weight: bold;
 }
 
 .rank-card tr:last-child td {
@@ -39,4 +88,44 @@
 .rank-card p {
   text-align: center;
   color: #ffd700;
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 420px) {
+  .rank-card {
+    max-width: 350px;
+    padding: 16px;
+  }
+  
+  .rank-card table {
+    font-size: 0.75rem;
+  }
+  
+  .rank-card th, .rank-card td {
+    padding: 4px 2px;
+  }
+  
+  .rank-card th:nth-child(1), .rank-card td:nth-child(1) {
+    width: 30%;
+  }
+  
+  .rank-card th:nth-child(2), .rank-card td:nth-child(2) {
+    width: 16%;
+  }
+  
+  .rank-card th:nth-child(3), .rank-card td:nth-child(3) {
+    width: 16%;
+  }
+  
+  .rank-card th:nth-child(4), .rank-card td:nth-child(4) {
+    width: 13%;
+  }
+  
+  .rank-card th:nth-child(5), .rank-card td:nth-child(5) {
+    width: 13%;
+  }
+  
+  .rank-card th:nth-child(6), .rank-card td:nth-child(6) {
+    width: 12%;
+  }
 }
