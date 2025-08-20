@@ -1,5 +1,7 @@
 .rank-card {
-  max-width: 400px;
+  max-width: none; /* Remover limitação de largura */
+  width: auto; /* Permitir que se adapte ao conteúdo */
+  min-width: 600px; /* Largura mínima para garantir espaço */
   margin: 0;
   box-shadow: 0 2px 8px #ccc;
   border-radius: 8px;
@@ -7,7 +9,7 @@
   background: #222;
   color: #fff;
   font-family: inherit;
-  overflow: hidden; /* Evita overflow no card */
+  overflow: visible; /* Remover limitação de overflow */
 }
 
 .rank-card h2 {
@@ -16,18 +18,20 @@
   color: #ffd700;
 }
 
-/* Container da tabela sem scroll horizontal */
+/* Container da tabela */
 .table-container {
-  width: 100%;
+  width: auto; /* Permitir que se adapte ao conteúdo */
+  min-width: 100%;
   overflow: visible;
 }
 
 .rank-card table {
-  width: 100%;
+  width: auto; /* Permitir que a tabela defina sua própria largura */
+  min-width: 560px; /* Garantir largura mínima baseada nas colunas */
   border-collapse: collapse;
   background: transparent;
-  font-size: 0.85rem; /* Fonte menor para economizar espaço */
-  table-layout: fixed; /* Layout fixo para controlar melhor as colunas */
+  font-size: 0.85rem;
+  table-layout: fixed;
 }
 
 .rank-card th, .rank-card td {
@@ -37,45 +41,63 @@
   white-space: nowrap; /* Evita quebra de linha */
 }
 
-/* Tamanhos específicos para cada coluna com porcentagens */
+/* 
+ * SISTEMA SIMPLIFICADO - LARGURAS FIXAS EM PIXELS
+ * - Posição: 50px
+ * - Nome: 180px (com truncamento em 30 caracteres) 
+ * - Rank: 80px
+ * - Pontos: 70px
+ * - K/D: 60px
+ * - HS%: 60px
+ * - MVP: 60px
+ * Total: ~560px com scroll horizontal automático quando necessário
+ * 
+ * CORREÇÕES APLICADAS:
+ * - Removido max-width do .app no index.css
+ * - Removido limitações de largura no App.jsx
+ * - Container da tabela com largura automática
+ * - Overflow horizontal em mobile
+ */
+
+/* Larguras fixas e simples para todas as colunas */
 .rank-card th:nth-child(1), .rank-card td:nth-child(1) { /* Posição */
-  width: 8%;
+  width: 50px;
   text-align: center;
   font-size: 0.9rem;
 }
 
 .rank-card th:nth-child(2), .rank-card td:nth-child(2) { /* Nome */
-  width: 24%;
+  width: 180px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .rank-card th:nth-child(3), .rank-card td:nth-child(3) { /* Rank */
-  width: 18%;
+  width: 80px;
   text-align: center;
 }
 
 .rank-card th:nth-child(4), .rank-card td:nth-child(4) { /* Pontos */
-  width: 16%;
+  width: 70px;
   text-align: center;
   font-size: 0.8rem;
 }
 
 .rank-card th:nth-child(5), .rank-card td:nth-child(5) { /* K/D */
-  width: 12%;
+  width: 60px;
   text-align: center;
   font-size: 0.8rem;
 }
 
 .rank-card th:nth-child(6), .rank-card td:nth-child(6) { /* HS% */
-  width: 12%;
+  width: 60px;
   text-align: center;
   font-size: 0.8rem;
 }
 
 .rank-card th:nth-child(7), .rank-card td:nth-child(7) { /* MVP */
-  width: 10%;
+  width: 60px;
   text-align: center;
   font-size: 0.8rem;
 }
@@ -114,6 +136,34 @@
 .player-name-cell {
   font-weight: bold;
   color: #32cd32;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Tooltip para nomes truncados */
+.player-name-cell[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 0.85em;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid #32cd32;
+  margin-top: 2px;
+  max-width: 300px;
+  word-break: break-all;
+}
+
+/* Garantir que o tooltip apareça apenas quando necessário */
+.player-name-cell[title]:hover {
+  overflow: visible;
+  z-index: 999;
 }
 
 .player-row.selected .player-name-cell {
@@ -125,46 +175,49 @@
   color: #ffd700;
 }
 
-/* Responsividade para telas muito pequenas */
+/* Responsividade simples para mobile */
 @media (max-width: 420px) {
   .rank-card {
-    max-width: 350px;
     padding: 16px;
+    min-width: 480px; /* Garantir espaço mínimo */
+    overflow-x: auto; /* Permitir scroll horizontal */
   }
   
   .rank-card table {
     font-size: 0.75rem;
+    min-width: 450px; /* Garantir que todas as colunas sejam visíveis */
   }
   
   .rank-card th, .rank-card td {
     padding: 4px 2px;
   }
   
+  /* Ajustar larguras para mobile mantendo proporções */
   .rank-card th:nth-child(1), .rank-card td:nth-child(1) {
-    width: 8%;
+    width: 40px;
   }
   
   .rank-card th:nth-child(2), .rank-card td:nth-child(2) {
-    width: 26%;
+    width: 160px;
   }
   
   .rank-card th:nth-child(3), .rank-card td:nth-child(3) {
-    width: 16%;
+    width: 70px;
   }
   
   .rank-card th:nth-child(4), .rank-card td:nth-child(4) {
-    width: 16%;
+    width: 60px;
   }
   
   .rank-card th:nth-child(5), .rank-card td:nth-child(5) {
-    width: 12%;
+    width: 50px;
   }
   
   .rank-card th:nth-child(6), .rank-card td:nth-child(6) {
-    width: 12%;
+    width: 50px;
   }
   
   .rank-card th:nth-child(7), .rank-card td:nth-child(7) {
-    width: 10%;
+    width: 50px;
   }
 }

@@ -20,9 +20,10 @@ function App() {
           display: flex;
           justify-content: center;
           align-items: flex-start;
-          height: 100vh;
+          min-height: 100vh;
           padding: 2rem;
-          overflow: hidden;
+          overflow-x: hidden;
+          overflow-y: auto;
         }
         
         @media (max-width: 1350px) {
@@ -30,15 +31,34 @@ function App() {
             flex-direction: column !important;
             align-items: center !important;
             width: 100% !important;
+            gap: 1rem !important;
           }
           .app-container > div {
             width: 100% !important;
-            max-width: 500px !important;
+            max-width: none !important; /* Remover limitação de largura */
             min-width: auto !important;
           }
           .hitbox-section {
             order: -1 !important;
-            max-width: 400px !important;
+            max-width: none !important; /* Remover limitação de largura */
+          }
+          .main-wrapper {
+            padding: 1rem !important;
+            height: auto !important;
+            min-height: 100vh !important;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .main-wrapper {
+            padding: 0.5rem !important;
+          }
+          .app-container {
+            gap: 0.5rem !important;
+          }
+          .app-container > div {
+            max-width: 100% !important;
+            margin: 0 !important;
           }
         }
       `}</style>
@@ -50,7 +70,7 @@ function App() {
             justifyContent: "flex-start",
             alignItems: "flex-start",
             gap: "2rem",
-            width: "1300px",
+            width: "auto" /* Permitir largura automática */,
             maxWidth: "100%",
           }}
         >
@@ -65,16 +85,18 @@ function App() {
           </div>
           <div
             style={{
-              width: "500px",
-              flex: "0 0 500px",
+              width: "auto" /* Permitir largura automática */,
+              flex: "1 1 auto" /* Permitir crescimento */,
+              minWidth: "600px" /* Largura mínima para a tabela */,
             }}
           >
             <ServerCard />
           </div>
           <div
             style={{
-              width: "400px",
-              flex: "0 0 400px",
+              width: "auto" /* Permitir largura automática */,
+              flex: "1 1 auto" /* Permitir crescimento */,
+              minWidth: "600px" /* Largura mínima para a tabela */,
             }}
           >
             <RankCard
