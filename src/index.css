@@ -757,11 +757,16 @@ body::after {
 }
 
 .hit-count {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: bold;
   color: #fff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
   z-index: 5;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1px 3px;
+  border-radius: 3px;
+  min-width: 20px;
+  text-align: center;
 }
 
 .head-area {
@@ -889,6 +894,66 @@ body::after {
   border: 1px solid #555 !important;
 }
 
+/* Player Stats Section */
+.player-stats {
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(50, 205, 50, 0.3);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-label {
+  color: #ccc;
+  font-size: 0.75em;
+  font-weight: 500;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.stat-value {
+  color: #32cd32;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.rank-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rank-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+}
+
+.rank-image {
+  height: 28px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 /* Responsive adjustments for hitbox card */
 @media (max-width: 1350px) {
   .hitbox-card {
@@ -951,6 +1016,29 @@ body::after {
   }
   
   .hit-count {
-    font-size: 10px;
+    font-size: 8px;
+    padding: 1px 2px;
+    min-width: 18px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .stat-item {
+    padding: 6px;
+  }
+  
+  .stat-label {
+    font-size: 0.7em;
+  }
+  
+  .stat-value {
+    font-size: 0.8em;
+  }
+  
+  .rank-image {
+    height: 24px;
   }
 }

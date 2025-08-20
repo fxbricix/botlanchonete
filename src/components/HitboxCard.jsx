@@ -44,6 +44,17 @@ export function HitboxCard({ selectedPlayer }) {
     left_leg_hits = 0,
     right_leg_hits = 0,
     neck_hits = 0,
+    kills = 0,
+    deaths = 0,
+    assists = 0,
+    firstblood = 0,
+    rounds_overall = 0,
+    round_win = 0,
+    round_lose = 0,
+    bomb_planted = 0,
+    bomb_defused = 0,
+    rank,
+    points = 0,
   } = selectedPlayer;
 
   const totalHits =
@@ -66,6 +77,17 @@ export function HitboxCard({ selectedPlayer }) {
     const percentage = (parseInt(hits) / totalHits) * 100;
     return Math.min(percentage / 50, 1); // Normaliza para 0-1, onde 50% = intensidade máxima
   };
+
+  const getRoundWinPercentage = () => {
+    const totalRounds = parseInt(round_win) + parseInt(round_lose);
+    if (totalRounds === 0) return "0.0";
+    return ((parseInt(round_win) / totalRounds) * 100).toFixed(1);
+  };
+
+  const isGlobalEliteTop = Number(points) > 6000;
+  const rankImageSrc = isGlobalEliteTop
+    ? "ranks/Global Elite Top.png"
+    : `ranks/${rank}.png`;
 
   return (
     <div className="hitbox-card">
@@ -91,7 +113,7 @@ export function HitboxCard({ selectedPlayer }) {
                 headshots
               )}%)`}
             >
-              <span className="hit-count">{headshots}</span>
+              <span className="hit-count">{getHitPercentage(headshots)}%</span>
             </div>
 
             {/* Pescoço */}
@@ -110,7 +132,7 @@ export function HitboxCard({ selectedPlayer }) {
                 neck_hits
               )}%)`}
             >
-              <span className="hit-count">{neck_hits}</span>
+              <span className="hit-count">{getHitPercentage(neck_hits)}%</span>
             </div>
 
             {/* Container do torso com braços */}
@@ -132,7 +154,9 @@ export function HitboxCard({ selectedPlayer }) {
                     left_arm_hits
                   )}%)`}
                 >
-                  <span className="hit-count">{left_arm_hits}</span>
+                  <span className="hit-count">
+                    {getHitPercentage(left_arm_hits)}%
+                  </span>
                 </div>
                 <div
                   className="hit-area right-arm"
@@ -149,7 +173,9 @@ export function HitboxCard({ selectedPlayer }) {
                     right_arm_hits
                   )}%)`}
                 >
-                  <span className="hit-count">{right_arm_hits}</span>
+                  <span className="hit-count">
+                    {getHitPercentage(right_arm_hits)}%
+                  </span>
                 </div>
               </div>
 
@@ -169,7 +195,9 @@ export function HitboxCard({ selectedPlayer }) {
                   chest_hits
                 )}%)`}
               >
-                <span className="hit-count">{chest_hits}</span>
+                <span className="hit-count">
+                  {getHitPercentage(chest_hits)}%
+                </span>
               </div>
             </div>
 
@@ -189,7 +217,9 @@ export function HitboxCard({ selectedPlayer }) {
                 stomach_hits
               )}%)`}
             >
-              <span className="hit-count">{stomach_hits}</span>
+              <span className="hit-count">
+                {getHitPercentage(stomach_hits)}%
+              </span>
             </div>
 
             {/* Pernas */}
@@ -209,7 +239,9 @@ export function HitboxCard({ selectedPlayer }) {
                   left_leg_hits
                 )}%)`}
               >
-                <span className="hit-count">{left_leg_hits}</span>
+                <span className="hit-count">
+                  {getHitPercentage(left_leg_hits)}%
+                </span>
               </div>
               <div
                 className="hit-area right-leg"
@@ -226,60 +258,65 @@ export function HitboxCard({ selectedPlayer }) {
                   right_leg_hits
                 )}%)`}
               >
-                <span className="hit-count">{right_leg_hits}</span>
+                <span className="hit-count">
+                  {getHitPercentage(right_leg_hits)}%
+                </span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="hitbox-stats">
-          <div className="stat-item">
-            <span className="stat-label">Total Hits:</span>
-            <span className="stat-value">{totalHits}</span>
-          </div>
-          <div className="stat-item headshot">
-            <span className="stat-label">Headshots:</span>
-            <span className="stat-value">
-              {headshots} ({getHitPercentage(headshots)}%)
-            </span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Chest:</span>
-            <span className="stat-value">
-              {chest_hits} ({getHitPercentage(chest_hits)}%)
-            </span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Stomach:</span>
-            <span className="stat-value">
-              {stomach_hits} ({getHitPercentage(stomach_hits)}%)
-            </span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Arms:</span>
-            <span className="stat-value">
-              {parseInt(left_arm_hits) + parseInt(right_arm_hits)} (
-              {getHitPercentage(
-                parseInt(left_arm_hits) + parseInt(right_arm_hits)
-              )}
-              %)
-            </span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Legs:</span>
-            <span className="stat-value">
-              {parseInt(left_leg_hits) + parseInt(right_leg_hits)} (
-              {getHitPercentage(
-                parseInt(left_leg_hits) + parseInt(right_leg_hits)
-              )}
-              %)
-            </span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Neck:</span>
-            <span className="stat-value">
-              {neck_hits} ({getHitPercentage(neck_hits)}%)
-            </span>
+        <div className="player-stats">
+          <div className="stats-grid">
+            <div className="stat-item">
+              <span className="stat-label">Kills</span>
+              <span className="stat-value">{kills}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Deaths</span>
+              <span className="stat-value">{deaths}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Assists</span>
+              <span className="stat-value">{assists}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">First Blood</span>
+              <span className="stat-value">{firstblood}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Rounds Total</span>
+              <span className="stat-value">{rounds_overall}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Round Win %</span>
+              <span className="stat-value">{getRoundWinPercentage()}%</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Bomb Planted</span>
+              <span className="stat-value">{bomb_planted}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Bomb Defused</span>
+              <span className="stat-value">{bomb_defused}</span>
+            </div>
+            <div className="stat-item rank-item">
+              <span className="stat-label">Rank</span>
+              <div className="rank-image-container">
+                {rank ? (
+                  <img
+                    src={rankImageSrc}
+                    alt={isGlobalEliteTop ? "Global Elite Top" : rank}
+                    className="rank-image"
+                    onError={(e) => {
+                      e.target.style.display = "none";
+                    }}
+                  />
+                ) : (
+                  <span className="stat-value">N/A</span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

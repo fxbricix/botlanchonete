@@ -14,7 +14,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
 
   const sortedRanks = ranks
     .sort((a, b) => Number(b.points) - Number(a.points))
-    .slice(0, 10);
+    .slice(0, 25);
 
   return (
     <div className="rank-card">
