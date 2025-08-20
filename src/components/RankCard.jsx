@@ -1,10 +1,10 @@
 import React from "react";
-import { useRanksData } from "../hooks/useRanksData.js";
+import { useRanksData } from "../hooks/useRanksData";
 import {
   calculateKD,
   calculateHeadshotPercentage,
   formatMVP,
-} from "../utils/statsUtils.js";
+} from "../utils/statsUtils";
 
 /**
  * Componente para exibir tabela de ranques

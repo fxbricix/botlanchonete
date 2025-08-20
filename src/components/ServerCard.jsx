@@ -1,16 +1,16 @@
 import React from "react";
-import { isConfigured } from "../config/index.js";
-import { useServerData } from "../hooks/useServerData.js";
+import { isConfigured } from "../config/index";
+import { useServerData } from "../hooks/useServerData";
 import {
   LoadingState,
   ErrorState,
   ConfigurationNeeded,
   NoDataState,
-} from "./StateComponents.jsx";
-import { ServerInfo } from "./ServerInfo.jsx";
-import { MapSection } from "./MapSection.jsx";
-import { ConnectSection } from "./ConnectSection.jsx";
-import { SocialButtons } from "./SocialButtons.jsx";
+} from "./StateComponents";
+import { ServerInfo } from "./ServerInfo";
+import { MapSection } from "./MapSection";
+import { ConnectSection } from "./ConnectSection";
+import { SocialButtons } from "./SocialButtons";
 
 /**
  * Componente principal do servidor
