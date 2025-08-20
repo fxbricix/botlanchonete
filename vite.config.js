@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,9 +11,15 @@ export default defineConfig({
   },
   publicDir: 'public',
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
-      '@': '/src'
+      '@': path.resolve(__dirname, './src'),
+      '~': path.resolve(__dirname, './src')
+    }
+  },
+  build: {
+    rollupOptions: {
+      external: [],
     }
   },
   server: {

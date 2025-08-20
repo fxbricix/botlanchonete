@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./rankcard.css";
-import { ServerCard } from "./components/ServerCard.jsx";
-import { RankCard } from "./components/RankCard.jsx";
-import { HitboxCard } from "./components/HitboxCard.jsx";
+import { ServerCard } from "./components/ServerCard";
+import { RankCard } from "./components/RankCard";
+import { HitboxCard } from "./components/HitboxCard";
 
 /**
  * Componente principal da aplicação

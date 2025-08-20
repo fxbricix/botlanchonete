@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { fetchServerData } from '../services/apiService.js';
-import { formatLastUpdate } from '../utils/formatters.js';
-import { config } from '../config/index.js';
+import { fetchServerData } from '../services/apiService';
+import { formatLastUpdate } from '../utils/formatters';
+import { config } from '../config/index';
 
 /**
  * Hook para gerenciar dados do servidor
