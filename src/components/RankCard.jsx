@@ -28,6 +28,7 @@ export function RankCard() {
           <table>
             <thead>
               <tr>
+                <th>#</th>
                 <th>Nome</th>
                 <th>Rank</th>
                 <th>Pts</th>
@@ -38,6 +39,7 @@ export function RankCard() {
             </thead>
             <tbody>
               {sortedRanks.map((item, idx) => {
+                const position = idx + 1;
                 const isGlobalEliteTop = Number(item.points) > 6000;
                 const kdRatio = calculateKD(item.kills, item.deaths);
                 const hsPercentage = calculateHeadshotPercentage(
@@ -46,8 +48,30 @@ export function RankCard() {
                 );
                 const mvpCount = formatMVP(item.mvp);
 
+                // Função para determinar o estilo da posição
+                const getPositionStyle = (pos) => {
+                  if (pos === 1)
+                    return { color: "#ffd700", fontWeight: "bold" }; // Ouro
+                  if (pos === 2)
+                    return { color: "#c0c0c0", fontWeight: "bold" }; // Prata
+                  if (pos === 3)
+                    return { color: "#cd7f32", fontWeight: "bold" }; // Bronze
+                  return {}; // Cor padrão
+                };
+
+                // Função para obter o símbolo da posição
+                const getPositionSymbol = (pos) => {
+                  if (pos === 1) return "🥇";
+                  if (pos === 2) return "🥈";
+                  if (pos === 3) return "🥉";
+                  return pos.toString();
+                };
+
                 return (
                   <tr key={item.steam_id || idx}>
+                    <td style={getPositionStyle(position)}>
+                      {getPositionSymbol(position)}
+                    </td>
                     <td>{item.name}</td>
                     <td>
                       {isGlobalEliteTop ? (
@@ -92,8 +116,7 @@ export function RankCard() {
           color: "#555",
           fontSize: "0.95rem",
         }}
-      >
-      </div>
+      ></div>
     </div>
   );
 }

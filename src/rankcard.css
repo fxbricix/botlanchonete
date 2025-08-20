@@ -38,38 +38,44 @@
 }
 
 /* Tamanhos específicos para cada coluna com porcentagens */
-.rank-card th:nth-child(1), .rank-card td:nth-child(1) { /* Nome */
-  width: 28%;
+.rank-card th:nth-child(1), .rank-card td:nth-child(1) { /* Posição */
+  width: 8%;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.rank-card th:nth-child(2), .rank-card td:nth-child(2) { /* Nome */
+  width: 24%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.rank-card th:nth-child(2), .rank-card td:nth-child(2) { /* Rank */
+.rank-card th:nth-child(3), .rank-card td:nth-child(3) { /* Rank */
   width: 18%;
   text-align: center;
 }
 
-.rank-card th:nth-child(3), .rank-card td:nth-child(3) { /* Pontos */
+.rank-card th:nth-child(4), .rank-card td:nth-child(4) { /* Pontos */
   width: 16%;
   text-align: center;
   font-size: 0.8rem;
 }
 
-.rank-card th:nth-child(4), .rank-card td:nth-child(4) { /* K/D */
-  width: 13%;
-  text-align: center;
-  font-size: 0.8rem;
-}
-
-.rank-card th:nth-child(5), .rank-card td:nth-child(5) { /* HS% */
-  width: 13%;
-  text-align: center;
-  font-size: 0.8rem;
-}
-
-.rank-card th:nth-child(6), .rank-card td:nth-child(6) { /* MVP */
+.rank-card th:nth-child(5), .rank-card td:nth-child(5) { /* K/D */
   width: 12%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.rank-card th:nth-child(6), .rank-card td:nth-child(6) { /* HS% */
+  width: 12%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.rank-card th:nth-child(7), .rank-card td:nth-child(7) { /* MVP */
+  width: 10%;
   text-align: center;
   font-size: 0.8rem;
 }
@@ -106,11 +112,11 @@
   }
   
   .rank-card th:nth-child(1), .rank-card td:nth-child(1) {
-    width: 30%;
+    width: 8%;
   }
   
   .rank-card th:nth-child(2), .rank-card td:nth-child(2) {
-    width: 16%;
+    width: 26%;
   }
   
   .rank-card th:nth-child(3), .rank-card td:nth-child(3) {
@@ -118,14 +124,18 @@
   }
   
   .rank-card th:nth-child(4), .rank-card td:nth-child(4) {
-    width: 13%;
+    width: 16%;
   }
   
   .rank-card th:nth-child(5), .rank-card td:nth-child(5) {
-    width: 13%;
+    width: 12%;
   }
   
   .rank-card th:nth-child(6), .rank-card td:nth-child(6) {
     width: 12%;
+  }
+  
+  .rank-card th:nth-child(7), .rank-card td:nth-child(7) {
+    width: 10%;
   }
 }
