@@ -1,4 +1,4 @@
-import { config } from '../config/index';
+import { config } from '../config/index.js';
 
 /**
  * Busca dados do servidor DatHost

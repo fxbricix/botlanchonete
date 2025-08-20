@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchRanksData } from '../services/apiService';
+import { fetchRanksData } from '../services/apiService.js';
 
 /**
  * Hook para gerenciar dados dos ranques

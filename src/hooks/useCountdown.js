@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { config } from '../config/index';
+import { config } from '../config/index.js';
 
 /**
  * Hook para gerenciar countdown de atualização
