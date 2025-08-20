@@ -35,12 +35,12 @@ function App() {
           }
           .app-container > div {
             width: 100% !important;
-            max-width: 500px !important;
+            max-width: none !important; /* Remover limitação de largura */
             min-width: auto !important;
           }
           .hitbox-section {
             order: -1 !important;
-            max-width: 400px !important;
+            max-width: none !important; /* Remover limitação de largura */
           }
           .main-wrapper {
             padding: 1rem !important;
@@ -70,7 +70,7 @@ function App() {
             justifyContent: "flex-start",
             alignItems: "flex-start",
             gap: "2rem",
-            width: "1300px",
+            width: "auto" /* Permitir largura automática */,
             maxWidth: "100%",
           }}
         >
@@ -85,16 +85,18 @@ function App() {
           </div>
           <div
             style={{
-              width: "500px",
-              flex: "0 0 500px",
+              width: "auto" /* Permitir largura automática */,
+              flex: "1 1 auto" /* Permitir crescimento */,
+              minWidth: "600px" /* Largura mínima para a tabela */,
             }}
           >
             <ServerCard />
           </div>
           <div
             style={{
-              width: "400px",
-              flex: "0 0 400px",
+              width: "auto" /* Permitir largura automática */,
+              flex: "1 1 auto" /* Permitir crescimento */,
+              minWidth: "600px" /* Largura mínima para a tabela */,
             }}
           >
             <RankCard

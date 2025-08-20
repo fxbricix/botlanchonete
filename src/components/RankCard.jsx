@@ -67,6 +67,14 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                   return pos.toString();
                 };
 
+                // Função para truncar o nome se necessário
+                const truncateName = (name) => {
+                  if (!name) return "";
+                  return name.length > 30
+                    ? name.substring(0, 30) + "..."
+                    : name;
+                };
+
                 return (
                   <tr
                     key={item.steam_id || idx}
@@ -81,7 +89,16 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                     <td style={getPositionStyle(position)}>
                       {getPositionSymbol(position)}
                     </td>
-                    <td className="player-name-cell">{item.name}</td>
+                    <td
+                      className="player-name-cell"
+                      title={
+                        item.name && item.name.length > 30
+                          ? item.name
+                          : undefined
+                      }
+                    >
+                      {truncateName(item.name)}
+                    </td>
                     <td>
                       {isGlobalEliteTop ? (
                         <img

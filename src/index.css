@@ -102,7 +102,7 @@ body::after {
 
 .app {
   width: 100%;
-  max-width: 500px;
+  max-width: none; /* Remover limitação para permitir que os cards se expandam */
 }
 
 .server-card {
