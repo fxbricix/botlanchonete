@@ -50,10 +50,7 @@ export function ServerCard() {
           ></span>
         </h1>
 
-        <ServerInfo
-          serverData={serverData}
-          isOnline={isOnline}
-        />
+        <ServerInfo serverData={serverData} isOnline={isOnline} />
 
         <MapSection status={status} />
 
