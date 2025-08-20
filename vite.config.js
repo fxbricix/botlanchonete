@@ -9,6 +9,12 @@ export default defineConfig({
     'process.env': {}
   },
   publicDir: 'public',
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@': '/src'
+    }
+  },
   server: {
     proxy: {
       '/api': {
