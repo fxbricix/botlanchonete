@@ -9,7 +9,7 @@ import {
 /**
  * Componente para exibir tabela de ranques
  */
-export function RankCard() {
+export function RankCard({ onPlayerSelect, selectedPlayer }) {
   const { ranks, loading, error } = useRanksData();
 
   const sortedRanks = ranks
@@ -68,11 +68,20 @@ export function RankCard() {
                 };
 
                 return (
-                  <tr key={item.steam_id || idx}>
+                  <tr
+                    key={item.steam_id || idx}
+                    className={`player-row ${
+                      selectedPlayer?.steam_id === item.steam_id
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() => onPlayerSelect(item)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <td style={getPositionStyle(position)}>
                       {getPositionSymbol(position)}
                     </td>
-                    <td>{item.name}</td>
+                    <td className="player-name-cell">{item.name}</td>
                     <td>
                       {isGlobalEliteTop ? (
                         <img

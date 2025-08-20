@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./rankcard.css";
 import { ServerCard } from "./components/ServerCard.jsx";
 import { RankCard } from "./components/RankCard.jsx";
+import { HitboxCard } from "./components/HitboxCard.jsx";
 
 /**
  * Componente principal da aplicação
  */
 function App() {
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+
+  const handlePlayerSelect = (player) => {
+    setSelectedPlayer(player);
+  };
   return (
     <>
       <style>{`
@@ -18,15 +24,20 @@ function App() {
           padding: 2rem;
         }
         
-        @media (max-width: 900px) {
+        @media (max-width: 1350px) {
           .app-container {
             flex-direction: column !important;
             align-items: center !important;
+            width: 100% !important;
           }
           .app-container > div {
             width: 100% !important;
             max-width: 500px !important;
             min-width: auto !important;
+          }
+          .hitbox-section {
+            order: -1 !important;
+            max-width: 400px !important;
           }
         }
       `}</style>
@@ -38,10 +49,19 @@ function App() {
             justifyContent: "flex-start",
             alignItems: "flex-start",
             gap: "2rem",
-            width: "900px",
+            width: "1300px",
             maxWidth: "100%",
           }}
         >
+          <div
+            className="hitbox-section"
+            style={{
+              width: "300px",
+              flex: "0 0 300px",
+            }}
+          >
+            <HitboxCard selectedPlayer={selectedPlayer} />
+          </div>
           <div
             style={{
               width: "500px",
@@ -56,7 +76,10 @@ function App() {
               flex: "0 0 400px",
             }}
           >
-            <RankCard />
+            <RankCard
+              onPlayerSelect={handlePlayerSelect}
+              selectedPlayer={selectedPlayer}
+            />
           </div>
         </div>
       </div>

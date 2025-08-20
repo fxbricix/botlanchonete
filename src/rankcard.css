@@ -91,6 +91,35 @@
   border-bottom: none;
 }
 
+/* Estilos para seleção de players */
+.player-row {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.player-row:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.player-row.selected {
+  background: rgba(255, 215, 0, 0.2);
+  border: 2px solid #ffd700;
+}
+
+.player-row.selected td {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.player-name-cell {
+  font-weight: bold;
+  color: #32cd32;
+}
+
+.player-row.selected .player-name-cell {
+  color: #ffd700;
+}
+
 .rank-card p {
   text-align: center;
   color: #ffd700;
