@@ -1,7 +1,7 @@
 import React from "react";
 import "./rankcard.css";
-import { ServerCard } from './components/ServerCard.jsx';
-import { RankCard } from './components/RankCard.jsx';
+import { ServerCard } from "./components/ServerCard.jsx";
+import { RankCard } from "./components/RankCard.jsx";
 
 /**
  * Componente principal da aplicação
