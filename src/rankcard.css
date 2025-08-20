@@ -1,12 +1,13 @@
 .rank-card {
   max-width: 400px;
-  margin: 2rem auto;
+  margin: 0;
   box-shadow: 0 2px 8px #ccc;
   border-radius: 8px;
   padding: 24px;
   background: #222;
   color: #fff;
   font-family: inherit;
+  overflow: hidden; /* Evita overflow no card */
 }
 
 .rank-card h2 {
@@ -15,28 +16,155 @@
   color: #ffd700;
 }
 
+/* Container da tabela sem scroll horizontal */
+.table-container {
+  width: 100%;
+  overflow: visible;
+}
+
 .rank-card table {
   width: 100%;
   border-collapse: collapse;
   background: transparent;
+  font-size: 0.85rem; /* Fonte menor para economizar espaço */
+  table-layout: fixed; /* Layout fixo para controlar melhor as colunas */
 }
 
 .rank-card th, .rank-card td {
   border-bottom: 1px solid #444;
-  padding: 8px;
+  padding: 6px 4px; /* Padding menor */
   text-align: left;
+  white-space: nowrap; /* Evita quebra de linha */
+}
+
+/* Tamanhos específicos para cada coluna com porcentagens */
+.rank-card th:nth-child(1), .rank-card td:nth-child(1) { /* Posição */
+  width: 8%;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.rank-card th:nth-child(2), .rank-card td:nth-child(2) { /* Nome */
+  width: 24%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-card th:nth-child(3), .rank-card td:nth-child(3) { /* Rank */
+  width: 18%;
+  text-align: center;
+}
+
+.rank-card th:nth-child(4), .rank-card td:nth-child(4) { /* Pontos */
+  width: 16%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.rank-card th:nth-child(5), .rank-card td:nth-child(5) { /* K/D */
+  width: 12%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.rank-card th:nth-child(6), .rank-card td:nth-child(6) { /* HS% */
+  width: 12%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.rank-card th:nth-child(7), .rank-card td:nth-child(7) { /* MVP */
+  width: 10%;
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .rank-card th {
   color: #ffd700;
   background: #222;
+  font-size: 0.85rem;
+  font-weight: bold;
 }
 
 .rank-card tr:last-child td {
   border-bottom: none;
 }
 
+/* Estilos para seleção de players */
+.player-row {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.player-row:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.player-row.selected {
+  background: rgba(255, 215, 0, 0.2);
+  border: 2px solid #ffd700;
+}
+
+.player-row.selected td {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.player-name-cell {
+  font-weight: bold;
+  color: #32cd32;
+}
+
+.player-row.selected .player-name-cell {
+  color: #ffd700;
+}
+
 .rank-card p {
   text-align: center;
   color: #ffd700;
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 420px) {
+  .rank-card {
+    max-width: 350px;
+    padding: 16px;
+  }
+  
+  .rank-card table {
+    font-size: 0.75rem;
+  }
+  
+  .rank-card th, .rank-card td {
+    padding: 4px 2px;
+  }
+  
+  .rank-card th:nth-child(1), .rank-card td:nth-child(1) {
+    width: 8%;
+  }
+  
+  .rank-card th:nth-child(2), .rank-card td:nth-child(2) {
+    width: 26%;
+  }
+  
+  .rank-card th:nth-child(3), .rank-card td:nth-child(3) {
+    width: 16%;
+  }
+  
+  .rank-card th:nth-child(4), .rank-card td:nth-child(4) {
+    width: 16%;
+  }
+  
+  .rank-card th:nth-child(5), .rank-card td:nth-child(5) {
+    width: 12%;
+  }
+  
+  .rank-card th:nth-child(6), .rank-card td:nth-child(6) {
+    width: 12%;
+  }
+  
+  .rank-card th:nth-child(7), .rank-card td:nth-child(7) {
+    width: 10%;
+  }
 }
