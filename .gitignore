@@ -31,4 +31,4 @@ dist-ssr
 *.sw?
 
 # Old Discord bot files
-index.js
+/index.js

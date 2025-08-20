@@ -1,6 +1,6 @@
 import React from "react";
-import { getMapImageUrl } from "../utils/mapUtils.js";
-import { getCurrentMap } from "../utils/formatters.js";
+import { getMapImageUrl } from "@/utils/mapUtils.js";
+import { getCurrentMap } from "@/utils/formatters.js";
 
 /**
  * Componente para exibir informações do mapa
