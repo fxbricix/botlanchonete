@@ -1,7 +1,6 @@
 import React from "react";
 import { isConfigured } from "../config/index.js";
 import { useServerData } from "../hooks/useServerData.js";
-import { useCountdown } from "../hooks/useCountdown.js";
 import {
   LoadingState,
   ErrorState,
@@ -18,7 +17,6 @@ import { SocialButtons } from "./SocialButtons.jsx";
  */
 export function ServerCard() {
   const { serverData, loading, error, refresh } = useServerData();
-  const countdown = useCountdown(serverData?.lastUpdate);
 
   // Se não está configurado, mostrar instruções
   if (!isConfigured()) {
@@ -54,7 +52,6 @@ export function ServerCard() {
 
         <ServerInfo
           serverData={serverData}
-          countdown={countdown}
           isOnline={isOnline}
         />
 

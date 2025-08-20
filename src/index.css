@@ -13,12 +13,10 @@ body {
   background-size: 400% 400%;
   animation: darkGradientShift 30s ease infinite;
   min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body::before {

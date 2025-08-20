@@ -48,7 +48,7 @@ export function ConnectSection({ serverData, loading, onRefresh }) {
           onClick={onRefresh}
           disabled={loading}
         >
-          {loading ? "🔄 Atualizando..." : "🔄 Atualizar Agora"}
+          {loading ? "🔄 Atualizando..." : "🔄 Atualizar"}
         </button>
       </div>
     </>

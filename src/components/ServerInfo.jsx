@@ -4,17 +4,12 @@ import { formatLocation, getRelevantStatus } from "../utils/formatters.js";
 /**
  * Componente para exibir informações do servidor
  */
-export function ServerInfo({ serverData, countdown, isOnline }) {
+export function ServerInfo({ serverData, isOnline }) {
   const { game, location, status } = serverData;
   const relevantStatus = getRelevantStatus(status);
 
   return (
     <div className="server-info">
-      <div className={`info-item ${isOnline ? "" : "info-item-grayed"}`}>
-        <div className="info-label">Game</div>
-        <div className="info-value">{String(game).toUpperCase()}</div>
-      </div>
-
       <div className={`info-item ${isOnline ? "" : "info-item-grayed"}`}>
         <div className="info-label">Local</div>
         <div className="info-value">{formatLocation(location)}</div>
@@ -34,11 +29,6 @@ export function ServerInfo({ serverData, countdown, isOnline }) {
           <div className="info-value">{s.value}</div>
         </div>
       ))}
-
-      <div className={`info-item ${isOnline ? "" : "info-item-grayed"}`}>
-        <div className="info-label">Atualiza em:</div>
-        <div className="info-value">{countdown}s</div>
-      </div>
     </div>
   );
 }
