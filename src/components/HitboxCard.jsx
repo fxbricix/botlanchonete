@@ -55,6 +55,7 @@ export function HitboxCard({ selectedPlayer }) {
     BombDefused: bomb_defused = 0,
     Rank: rank,
     Points: points = 0,
+    top_weapons = [],
   } = selectedPlayer;
 
   const name = playerName || "Jogador precisa logar";
@@ -84,6 +85,94 @@ export function HitboxCard({ selectedPlayer }) {
     const totalRounds = parseInt(round_win) + parseInt(round_lose);
     if (totalRounds === 0) return "0.0";
     return ((parseInt(round_win) / totalRounds) * 100).toFixed(1);
+  };
+
+  // Função para mapear nomes de armas da API para nomes dos arquivos SVG
+  const getWeaponIcon = (weaponName) => {
+    const weaponMap = {
+      ak47: "weapon_ak47_sprite.svg",
+      aug: "weapon_aug_sprite.svg",
+      awp: "weapon_awp_sprite.svg",
+      bizon: "weapon_bizon_sprite.svg",
+      cz75a: "weapon_cz75a_sprite.svg",
+      deagle: "weapon_deagle_sprite.svg",
+      elite: "weapon_elite_sprite.svg",
+      famas: "weapon_famas_sprite.svg",
+      fiveseven: "weapon_fiveseven_sprite.svg",
+      g3sg1: "weapon_g3sg1_sprite.svg",
+      galilar: "weapon_galilar_sprite.svg",
+      glock: "weapon_glock_sprite.svg",
+      hkp2000: "weapon_hkp2000_sprite.svg",
+      knife: "weapon_knife_sprite.svg",
+      m249: "weapon_m249_sprite.svg",
+      m4a1: "weapon_m4a1_sprite.svg",
+      m4a1_silencer: "weapon_m4a1_silencer_sprite.svg",
+      mac10: "weapon_mac10_sprite.svg",
+      mag7: "weapon_mag7_sprite.svg",
+      mp5sd: "weapon_mp5sd_sprite.svg",
+      mp7: "weapon_mp7_sprite.svg",
+      mp9: "weapon_mp9_sprite.svg",
+      negev: "weapon_negev_sprite.svg",
+      nova: "weapon_nova_sprite.svg",
+      p250: "weapon_p250_sprite.svg",
+      p90: "weapon_p90_sprite.svg",
+      revolver: "weapon_revolver_sprite.svg",
+      sawedoff: "weapon_sawedoff_sprite.svg",
+      scar20: "weapon_scar20_sprite.svg",
+      sg556: "weapon_sg556_sprite.svg",
+      ssg08: "weapon_ssg08_sprite.svg",
+      tec9: "weapon_tec9_sprite.svg",
+      ump45: "weapon_ump45_sprite.svg",
+      usp_silencer: "weapon_usp_silencer_sprite.svg",
+      "usp-s": "weapon_usp_silencer_sprite.svg",
+      xm1014: "weapon_xm1014_sprite.svg",
+    };
+
+    return weaponMap[weaponName] || null;
+  };
+
+  // Função para obter nome amigável da arma
+  const getWeaponDisplayName = (weaponName) => {
+    const nameMap = {
+      ak47: "AK-47",
+      aug: "AUG",
+      awp: "AWP",
+      bizon: "PP-Bizon",
+      cz75a: "CZ75-Auto",
+      deagle: "Desert Eagle",
+      elite: "Dual Berettas",
+      famas: "FAMAS",
+      fiveseven: "Five-SeveN",
+      g3sg1: "G3SG1",
+      galilar: "Galil AR",
+      glock: "Glock-18",
+      hkp2000: "P2000",
+      knife: "Knife",
+      m249: "M249",
+      m4a1: "M4A4",
+      m4a1_silencer: "M4A1-S",
+      mac10: "MAC-10",
+      mag7: "MAG-7",
+      mp5sd: "MP5-SD",
+      mp7: "MP7",
+      mp9: "MP9",
+      negev: "Negev",
+      nova: "Nova",
+      p250: "P250",
+      p90: "P90",
+      revolver: "R8 Revolver",
+      sawedoff: "Sawed-Off",
+      scar20: "SCAR-20",
+      sg556: "SG 553",
+      ssg08: "SSG 08",
+      tec9: "Tec-9",
+      ump45: "UMP-45",
+      usp_silencer: "USP-S",
+      "usp-s": "USP-S",
+      xm1014: "XM1014",
+    };
+
+    return nameMap[weaponName] || weaponName.toUpperCase();
   };
 
   const isGlobalEliteTop = Number(points) > 6000;
@@ -318,6 +407,61 @@ export function HitboxCard({ selectedPlayer }) {
                   <span className="stat-value">N/A</span>
                 )}
               </div>
+            </div>
+          </div>
+
+          {/* Top Weapons Section */}
+          <div className="top-weapons-section">
+            <h3 className="weapons-title">Armas Favoritas</h3>
+            <div className="weapons-grid">
+              {Array.from({ length: 3 }, (_, index) => {
+                const weapon = top_weapons[index];
+
+                if (!weapon) {
+                  return (
+                    <div key={index} className="weapon-card weapon-card-empty">
+                      <div className="weapon-icon-placeholder">
+                        <span>N/A</span>
+                      </div>
+                      <div className="weapon-info">
+                        <span className="weapon-name">-</span>
+                        <span className="weapon-kills">0 kills</span>
+                      </div>
+                    </div>
+                  );
+                }
+
+                const iconSrc = getWeaponIcon(weapon.weapon);
+                const displayName = getWeaponDisplayName(weapon.weapon);
+
+                return (
+                  <div key={index} className="weapon-card">
+                    <div className="weapon-icon">
+                      {iconSrc ? (
+                        <img
+                          src={`weaponicons/${iconSrc}`}
+                          alt={displayName}
+                          className="weapon-svg"
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                            e.target.nextSibling.style.display = "block";
+                          }}
+                        />
+                      ) : null}
+                      <span
+                        className="weapon-fallback"
+                        style={{ display: iconSrc ? "none" : "block" }}
+                      >
+                        {weapon.weapon.toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="weapon-info">
+                      <span className="weapon-name">{displayName}</span>
+                      <span className="weapon-kills">{weapon.kills} kills</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
