@@ -175,7 +175,7 @@ export function HitboxCard({ selectedPlayer }) {
     return nameMap[weaponName] || weaponName.toUpperCase();
   };
 
-  const isGlobalEliteTop = Number(points) > 6000;
+  const isGlobalEliteTop = Number(points) > 7200;
   const rankImageSrc = isGlobalEliteTop
     ? "ranks/Global Elite Top.png"
     : `ranks/${rank}.png`;
