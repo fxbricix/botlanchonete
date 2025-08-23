@@ -394,7 +394,7 @@ export function HitboxCard({ selectedPlayer }) {
             <div className="stat-item rank-item">
               <span className="stat-label">Rank</span>
               <div className="rank-image-container">
-                {rank && rank.trim() !== '' && rank.trim() !== '-' ? (
+                {rank && rank.trim() !== "" && rank.trim() !== "-" ? (
                   <img
                     src={rankImageSrc}
                     alt={isGlobalEliteTop ? "Global Elite Top" : rank}
