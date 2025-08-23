@@ -175,10 +175,7 @@ export function HitboxCard({ selectedPlayer }) {
     return nameMap[weaponName] || weaponName.toUpperCase();
   };
 
-  const isGlobalEliteTop = Number(points) > 7200;
-  const rankImageSrc = isGlobalEliteTop
-    ? "ranks/Global Elite Top.png"
-    : `ranks/${rank}.png`;
+  const rankImageSrc = `ranks/${rank}.png`;
 
   return (
     <div className="hitbox-card">
@@ -397,7 +394,7 @@ export function HitboxCard({ selectedPlayer }) {
                 {rank && rank.trim() !== "" && rank.trim() !== "-" ? (
                   <img
                     src={rankImageSrc}
-                    alt={isGlobalEliteTop ? "Global Elite Top" : rank}
+                    alt={rank}
                     className="rank-image"
                     onError={(e) => {
                       e.target.style.display = "none";
