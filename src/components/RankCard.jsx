@@ -14,7 +14,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
 
   const sortedRanks = ranks
     .sort((a, b) => Number(b.Points) - Number(a.Points))
-    .slice(0, 25);
+    .slice(0, 20);
 
   return (
     <div className="rank-card">
@@ -69,10 +69,10 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
 
                 // Função para truncar o nome se necessário
                 const truncateName = (name) => {
-                  if (!name) return "";
-                  return name.length > 30
-                    ? name.substring(0, 30) + "..."
-                    : name;
+                  const displayName = name || "Jogador precisa logar";
+                  return displayName.length > 30
+                    ? displayName.substring(0, 30) + "..."
+                    : displayName;
                 };
 
                 return (
@@ -92,8 +92,8 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                     <td
                       className="player-name-cell"
                       title={
-                        item.name && item.name.length > 30
-                          ? item.name
+                        (item.name || "Jogador precisa logar").length > 30
+                          ? item.name || "Jogador precisa logar"
                           : undefined
                       }
                     >

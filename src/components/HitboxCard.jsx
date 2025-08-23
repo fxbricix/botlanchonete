@@ -35,7 +35,7 @@ export function HitboxCard({ selectedPlayer }) {
   }
 
   const {
-    name,
+    name: playerName,
     Headshots: headshots = 0,
     ChestHits: chest_hits = 0,
     StomachHits: stomach_hits = 0,
@@ -56,6 +56,8 @@ export function HitboxCard({ selectedPlayer }) {
     Rank: rank,
     Points: points = 0,
   } = selectedPlayer;
+
+  const name = playerName || "Jogador precisa logar";
 
   const totalHits =
     parseInt(headshots) +
