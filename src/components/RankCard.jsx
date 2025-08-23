@@ -13,7 +13,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
   const { ranks, loading, error } = useRanksData();
 
   const sortedRanks = ranks
-    .sort((a, b) => Number(b.points) - Number(a.points))
+    .sort((a, b) => Number(b.Points) - Number(a.Points))
     .slice(0, 25);
 
   return (
@@ -40,13 +40,13 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
             <tbody>
               {sortedRanks.map((item, idx) => {
                 const position = idx + 1;
-                const isGlobalEliteTop = Number(item.points) > 6000;
-                const kdRatio = calculateKD(item.kills, item.deaths);
+                const isGlobalEliteTop = Number(item.Points) > 6000;
+                const kdRatio = calculateKD(item.Kills, item.Deaths);
                 const hsPercentage = calculateHeadshotPercentage(
-                  item.kills,
-                  item.headshots
+                  item.Kills,
+                  item.Headshots
                 );
-                const mvpCount = formatMVP(item.mvp);
+                const mvpCount = formatMVP(item.MVP);
 
                 // Função para determinar o estilo da posição
                 const getPositionStyle = (pos) => {
@@ -109,10 +109,10 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                             e.target.style.display = "none";
                           }}
                         />
-                      ) : item.rank ? (
+                      ) : item.Rank ? (
                         <img
-                          src={`ranks/${item.rank}.png`}
-                          alt={item.rank}
+                          src={`ranks/${item.Rank}.png`}
+                          alt={item.Rank}
                           style={{ height: 24, verticalAlign: "middle" }}
                           onError={(e) => {
                             e.target.style.display = "none";
@@ -120,7 +120,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                         />
                       ) : null}
                     </td>
-                    <td>{item.points}</td>
+                    <td>{item.Points}</td>
                     <td>{kdRatio}</td>
                     <td>{hsPercentage}</td>
                     <td>{mvpCount}</td>
