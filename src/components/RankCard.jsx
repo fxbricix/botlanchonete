@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRanksData } from "@/hooks/useRanksData.js";
 import {
   calculateKD,
@@ -11,10 +11,29 @@ import {
  */
 export function RankCard({ onPlayerSelect, selectedPlayer }) {
   const { ranks, loading, error } = useRanksData();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
-  const sortedRanks = ranks
-    .sort((a, b) => Number(b.points) - Number(a.points))
-    .slice(0, 25);
+  const sortedRanks = ranks.sort((a, b) => Number(b.Points) - Number(a.Points));
+
+  // Cálculos de paginação
+  const totalPages = Math.ceil(sortedRanks.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentRanks = sortedRanks.slice(startIndex, endIndex);
+
+  // Funções de navegação
+  const goToPage = (page) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+  };
+
+  const goToPrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
 
   return (
     <div className="rank-card">
@@ -38,15 +57,15 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
               </tr>
             </thead>
             <tbody>
-              {sortedRanks.map((item, idx) => {
-                const position = idx + 1;
-                const isGlobalEliteTop = Number(item.points) > 6000;
-                const kdRatio = calculateKD(item.kills, item.deaths);
+              {currentRanks.map((item, idx) => {
+                const position = startIndex + idx + 1; // Posição real considerando a página
+                const isGlobalEliteTop = Number(item.Points) > 6000;
+                const kdRatio = calculateKD(item.Kills, item.Deaths);
                 const hsPercentage = calculateHeadshotPercentage(
-                  item.kills,
-                  item.headshots
+                  item.Kills,
+                  item.Headshots
                 );
-                const mvpCount = formatMVP(item.mvp);
+                const mvpCount = formatMVP(item.MVP);
 
                 // Função para determinar o estilo da posição
                 const getPositionStyle = (pos) => {
@@ -69,10 +88,10 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
 
                 // Função para truncar o nome se necessário
                 const truncateName = (name) => {
-                  if (!name) return "";
-                  return name.length > 30
-                    ? name.substring(0, 30) + "..."
-                    : name;
+                  const displayName = name || "Jogador precisa logar";
+                  return displayName.length > 30
+                    ? displayName.substring(0, 30) + "..."
+                    : displayName;
                 };
 
                 return (
@@ -92,8 +111,8 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                     <td
                       className="player-name-cell"
                       title={
-                        item.name && item.name.length > 30
-                          ? item.name
+                        (item.name || "Jogador precisa logar").length > 30
+                          ? item.name || "Jogador precisa logar"
                           : undefined
                       }
                     >
@@ -109,10 +128,10 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                             e.target.style.display = "none";
                           }}
                         />
-                      ) : item.rank ? (
+                      ) : item.Rank ? (
                         <img
-                          src={`ranks/${item.rank}.png`}
-                          alt={item.rank}
+                          src={`ranks/${item.Rank}.png`}
+                          alt={item.Rank}
                           style={{ height: 24, verticalAlign: "middle" }}
                           onError={(e) => {
                             e.target.style.display = "none";
@@ -120,7 +139,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                         />
                       ) : null}
                     </td>
-                    <td>{item.points}</td>
+                    <td>{item.Points}</td>
                     <td>{kdRatio}</td>
                     <td>{hsPercentage}</td>
                     <td>{mvpCount}</td>
@@ -129,6 +148,49 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
               })}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Controles de Paginação */}
+      {!loading && !error && totalPages > 1 && (
+        <div className="pagination-controls">
+          <div className="pagination-info">
+            Página {currentPage} de {totalPages} ({sortedRanks.length} jogadores
+            total)
+          </div>
+          <div className="pagination-buttons">
+            <button
+              onClick={goToPrevPage}
+              disabled={currentPage === 1}
+              className="pagination-btn"
+            >
+              ◀ Anterior
+            </button>
+
+            <div className="page-numbers">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    onClick={() => goToPage(page)}
+                    className={`page-number-btn ${
+                      currentPage === page ? "active" : ""
+                    }`}
+                  >
+                    {page}
+                  </button>
+                )
+              )}
+            </div>
+
+            <button
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+              className="pagination-btn"
+            >
+              Próxima ▶
+            </button>
+          </div>
         </div>
       )}
 

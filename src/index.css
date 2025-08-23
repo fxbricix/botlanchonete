@@ -991,6 +991,104 @@ body::after {
   object-fit: contain;
 }
 
+/* Top Weapons Section */
+.top-weapons-section {
+  margin-top: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid rgba(50, 205, 50, 0.2);
+}
+
+.weapons-title {
+  color: #32cd32;
+  font-size: 1em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(50, 205, 50, 0.5);
+}
+
+.weapons-grid {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.weapon-card {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(50, 205, 50, 0.2);
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.weapon-card:hover {
+  border-color: #32cd32;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(50, 205, 50, 0.3);
+}
+
+.weapon-card-empty {
+  opacity: 0.4;
+  border-style: dashed;
+}
+
+.weapon-icon {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.weapon-icon-placeholder {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  color: #666;
+  font-size: 0.75em;
+}
+
+.weapon-svg {
+  max-height: 25px;
+  max-width: 100%;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+.weapon-card:hover .weapon-svg {
+  filter: brightness(0) saturate(100%) invert(64%) sepia(85%) saturate(503%) hue-rotate(75deg) brightness(95%) contrast(87%);
+}
+
+.weapon-fallback {
+  font-size: 0.65em;
+  color: #32cd32;
+  font-weight: 600;
+}
+
+.weapon-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.weapon-name {
+  color: #fff;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+.weapon-kills {
+  color: #32cd32;
+  font-size: 0.7em;
+  font-weight: 500;
+}
+
 /* Responsive adjustments for hitbox card */
 @media (max-width: 1350px) {
   .hitbox-card {
@@ -1077,6 +1175,31 @@ body::after {
   
   .rank-image {
     height: 24px;
+  }
+
+  .weapons-grid {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .weapon-card {
+    padding: 8px;
+  }
+  
+  .weapon-icon {
+    height: 30px;
+  }
+  
+  .weapon-svg {
+    max-height: 25px;
+  }
+  
+  .weapon-name {
+    font-size: 0.75em;
+  }
+  
+  .weapon-kills {
+    font-size: 0.7em;
   }
 }
 

@@ -1,36 +1,45 @@
 .rank-card {
-  max-width: none; /* Remover limitação de largura */
-  width: auto; /* Permitir que se adapte ao conteúdo */
-  min-width: 600px; /* Largura mínima para garantir espaço */
-  margin: 0;
-  box-shadow: 0 2px 8px #ccc;
-  border-radius: 8px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
+  border: 2px solid #32cd32;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(50, 205, 50, 0.3), 0 0 20px rgba(255, 215, 0, 0.1);
   padding: 24px;
-  background: #222;
   color: #fff;
-  font-family: inherit;
-  overflow: visible; /* Remover limitação de overflow */
+  font-family: 'Poppins', sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rank-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(50, 205, 50, 0.4), 0 0 30px rgba(255, 215, 0, 0.2);
 }
 
 .rank-card h2 {
   text-align: center;
   margin-bottom: 1rem;
-  color: #ffd700;
+  color: #32cd32;
+  font-size: 1.4em;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(50, 205, 50, 0.5);
 }
 
 /* Container da tabela */
 .table-container {
-  width: auto; /* Permitir que se adapte ao conteúdo */
-  min-width: 100%;
-  overflow: visible;
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border: 1px solid rgba(50, 205, 50, 0.2);
 }
 
 .rank-card table {
-  width: auto; /* Permitir que a tabela defina sua própria largura */
-  min-width: 560px; /* Garantir largura mínima baseada nas colunas */
+  width: 100%;
+  min-width: 560px;
   border-collapse: collapse;
   background: transparent;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
   table-layout: fixed;
 }
 
@@ -103,10 +112,13 @@
 }
 
 .rank-card th {
-  color: #ffd700;
-  background: #222;
-  font-size: 0.85rem;
-  font-weight: bold;
+  color: #32cd32;
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 0 5px rgba(50, 205, 50, 0.3);
+  border-bottom: 2px solid #32cd32;
 }
 
 .rank-card tr:last-child td {
@@ -117,20 +129,24 @@
 .player-row {
   transition: all 0.3s ease;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
 }
 
 .player-row:hover {
-  background: rgba(255, 215, 0, 0.1);
+  background: rgba(50, 205, 50, 0.1);
+  transform: translateX(5px);
 }
 
 .player-row.selected {
-  background: rgba(255, 215, 0, 0.2);
-  border: 2px solid #ffd700;
+  background: rgba(50, 205, 50, 0.2);
+  border: 2px solid #32cd32;
+  box-shadow: 0 0 10px rgba(50, 205, 50, 0.3);
 }
 
 .player-row.selected td {
-  color: #ffd700;
-  font-weight: bold;
+  color: #32cd32;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(50, 205, 50, 0.3);
 }
 
 .player-name-cell {
@@ -219,5 +235,106 @@
   
   .rank-card th:nth-child(7), .rank-card td:nth-child(7) {
     width: 50px;
+  }
+}
+
+/* Estilos da Paginação */
+.pagination-controls {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.pagination-info {
+  color: #32cd32;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 500;
+  text-shadow: 0 0 5px rgba(50, 205, 50, 0.3);
+}
+
+.pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pagination-btn {
+  background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+  color: #fff;
+  border: 2px solid #32cd32;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(50, 205, 50, 0.2);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+  border-color: #32cd32;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(50, 205, 50, 0.3);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 4px;
+  margin: 0 0.8rem;
+}
+
+.page-number-btn {
+  background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+  color: #fff;
+  border: 2px solid #32cd32;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  min-width: 38px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(50, 205, 50, 0.2);
+}
+
+.page-number-btn:hover {
+  background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(50, 205, 50, 0.3);
+}
+
+.page-number-btn.active {
+  background: linear-gradient(145deg, #32cd32, #28a428);
+  color: #000;
+  border-color: #32cd32;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(50, 205, 50, 0.4);
+  text-shadow: none;
+}
+
+/* Responsividade da paginação */
+@media (max-width: 600px) {
+  .pagination-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .page-numbers {
+    margin: 0;
   }
 }
