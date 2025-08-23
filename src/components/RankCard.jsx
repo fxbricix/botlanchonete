@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRanksData } from "@/hooks/useRanksData.js";
 import {
   calculateKD,
@@ -11,10 +11,29 @@ import {
  */
 export function RankCard({ onPlayerSelect, selectedPlayer }) {
   const { ranks, loading, error } = useRanksData();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
-  const sortedRanks = ranks
-    .sort((a, b) => Number(b.Points) - Number(a.Points))
-    .slice(0, 20);
+  const sortedRanks = ranks.sort((a, b) => Number(b.Points) - Number(a.Points));
+
+  // Cálculos de paginação
+  const totalPages = Math.ceil(sortedRanks.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentRanks = sortedRanks.slice(startIndex, endIndex);
+
+  // Funções de navegação
+  const goToPage = (page) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+  };
+
+  const goToPrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
 
   return (
     <div className="rank-card">
@@ -38,8 +57,8 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
               </tr>
             </thead>
             <tbody>
-              {sortedRanks.map((item, idx) => {
-                const position = idx + 1;
+              {currentRanks.map((item, idx) => {
+                const position = startIndex + idx + 1; // Posição real considerando a página
                 const isGlobalEliteTop = Number(item.Points) > 6000;
                 const kdRatio = calculateKD(item.Kills, item.Deaths);
                 const hsPercentage = calculateHeadshotPercentage(
@@ -129,6 +148,49 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
               })}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Controles de Paginação */}
+      {!loading && !error && totalPages > 1 && (
+        <div className="pagination-controls">
+          <div className="pagination-info">
+            Página {currentPage} de {totalPages} ({sortedRanks.length} jogadores
+            total)
+          </div>
+          <div className="pagination-buttons">
+            <button
+              onClick={goToPrevPage}
+              disabled={currentPage === 1}
+              className="pagination-btn"
+            >
+              ◀ Anterior
+            </button>
+
+            <div className="page-numbers">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    onClick={() => goToPage(page)}
+                    className={`page-number-btn ${
+                      currentPage === page ? "active" : ""
+                    }`}
+                  >
+                    {page}
+                  </button>
+                )
+              )}
+            </div>
+
+            <button
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+              className="pagination-btn"
+            >
+              Próxima ▶
+            </button>
+          </div>
         </div>
       )}
 
