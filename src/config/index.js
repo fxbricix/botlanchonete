@@ -32,4 +32,6 @@ export const AVAILABLE_MAPS = [
   "de_vertigo.png",
   "de_ancient_night.png",
   "de_cache.png",
+  "de_dust_hr.png",
+  "de_aztec_hr.png"
 ];
