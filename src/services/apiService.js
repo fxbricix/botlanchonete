@@ -57,13 +57,15 @@ export async function fetchServerData() {
  * @returns {Promise<Array>} Lista de ranques
  */
 export async function fetchRanksData() {
+  {console.log("Consultando RANK DB:")}
   const response = await fetch(config.PLAYER_API_URL, { method: "GET" });
   
   const text = await response.text();
   if (!response.ok) {
+    {console.log("Erro na requisiçao: STATUS: ", response.status)}
     throw new Error(`HTTP ${response.status}: ${response.statusText} - ${text}`);
   }
-  
+  {console.log("Recebido com sucesso")}
   // Remove caracteres inválidos antes do JSON
   const jsonStart = text.indexOf("[");
   const cleanText = jsonStart >= 0 ? text.slice(jsonStart) : text;
