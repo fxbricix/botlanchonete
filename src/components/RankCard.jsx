@@ -45,7 +45,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
               <tr>
                 <th>#</th>
                 <th>Nome</th>
-                <th>Pts</th>
+                <th>Elo</th>
                 <th>K/D</th>
               </tr> 
             </thead>
