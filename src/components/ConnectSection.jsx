@@ -11,7 +11,7 @@ export function ConnectSection({ serverData, loading, onRefresh }) {
 
     // Pequeno delay antes de abrir o Steam
     setTimeout(() => {
-      const steamUrl = `steam://run/730//+connect ${config.SERVER_IP}`;
+      const steamUrl = `steam://run/730//+connect ${serverData.custom_domain}:${serverData.ports.game}`;
       window.open(steamUrl, "_blank");
     }, 100);
   };
