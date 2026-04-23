@@ -34,81 +34,37 @@
 }
 
 .rank-card table {
-  width: 100%;
-  min-width: 560px;
+  width: max-content;
+  min-width: 100%;
   border-collapse: collapse;
   background: transparent;
   font-size: 0.9rem;
   font-family: 'Poppins', sans-serif;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 .rank-card th, .rank-card td {
   border-bottom: 1px solid #444;
-  padding: 6px 4px; /* Padding menor */
+  padding: 6px 10px;
   text-align: left;
   white-space: nowrap; /* Evita quebra de linha */
 }
 
-/* 
- * SISTEMA SIMPLIFICADO - LARGURAS FIXAS EM PIXELS
- * - Posição: 50px
- * - Nome: 180px (com truncamento em 30 caracteres) 
- * - Rank: 80px
- * - Pontos: 70px
- * - K/D: 60px
- * - HS%: 60px
- * - MVP: 60px
- * Total: ~560px com scroll horizontal automático quando necessário
- * 
- * CORREÇÕES APLICADAS:
- * - Removido max-width do .app no index.css
- * - Removido limitações de largura no App.jsx
- * - Container da tabela com largura automática
- * - Overflow horizontal em mobile
- */
-
-/* Larguras fixas e simples para todas as colunas */
 .rank-card th:nth-child(1), .rank-card td:nth-child(1) { /* Posição */
-  width: 50px;
   text-align: center;
-  font-size: 0.9rem;
 }
 
 .rank-card th:nth-child(2), .rank-card td:nth-child(2) { /* Nome */
-  width: 120px;
+  width: 20ch;
+  max-width: 20ch;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.rank-card th:nth-child(3), .rank-card td:nth-child(3) { /* Rank */
-  width: 60px;
+.rank-card th:nth-child(3), .rank-card td:nth-child(3),
+.rank-card th:nth-child(4), .rank-card td:nth-child(4),
+.rank-card th:nth-child(5), .rank-card td:nth-child(5) {
   text-align: center;
-}
-
-.rank-card th:nth-child(4), .rank-card td:nth-child(4) { /* Pontos */
-  width: 60px;
-  text-align: center;
-  font-size: 0.8rem;
-}
-
-.rank-card th:nth-child(5), .rank-card td:nth-child(5) { /* K/D */
-  width: 30px;
-  text-align: center;
-  font-size: 0.8rem;
-}
-
-.rank-card th:nth-child(6), .rank-card td:nth-child(6) { /* HS% */
-  width: 60px;
-  text-align: center;
-  font-size: 0.8rem;
-}
-
-.rank-card th:nth-child(7), .rank-card td:nth-child(7) { /* MVP */
-  width: 60px;
-  text-align: center;
-  font-size: 0.8rem;
 }
 
 .rank-card th {
@@ -195,46 +151,17 @@
 @media (max-width: 420px) {
   .rank-card {
     padding: 16px;
-    min-width: 480px; /* Garantir espaço mínimo */
+    min-width: 0;
     overflow-x: auto; /* Permitir scroll horizontal */
   }
   
   .rank-card table {
     font-size: 0.75rem;
-    min-width: 450px; /* Garantir que todas as colunas sejam visíveis */
+    min-width: 100%;
   }
   
   .rank-card th, .rank-card td {
     padding: 4px 2px;
-  }
-  
-  /* Ajustar larguras para mobile mantendo proporções */
-  .rank-card th:nth-child(1), .rank-card td:nth-child(1) {
-    width: 40px;
-  }
-  
-  .rank-card th:nth-child(2), .rank-card td:nth-child(2) {
-    width: 160px;
-  }
-  
-  .rank-card th:nth-child(3), .rank-card td:nth-child(3) {
-    width: 70px;
-  }
-  
-  .rank-card th:nth-child(4), .rank-card td:nth-child(4) {
-    width: 60px;
-  }
-  
-  .rank-card th:nth-child(5), .rank-card td:nth-child(5) {
-    width: 50px;
-  }
-  
-  .rank-card th:nth-child(6), .rank-card td:nth-child(6) {
-    width: 50px;
-  }
-  
-  .rank-card th:nth-child(7), .rank-card td:nth-child(7) {
-    width: 50px;
   }
 }
 

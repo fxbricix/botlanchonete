@@ -52,7 +52,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                 <th>Rank</th>
                 <th>Pts</th>
                 <th>K/D</th>
-              </tr>
+              </tr> 
             </thead>
             <tbody>
               {currentRanks.map((item, idx) => {
@@ -87,8 +87,8 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                 // Função para truncar o nome se necessário
                 const truncateName = (name) => {
                   const displayName = name || "Jogador precisa logar";
-                  return displayName.length > 30
-                    ? displayName.substring(0, 30) + "..."
+                  return displayName.length > 25
+                    ? displayName.substring(0, 25) + "..."
                     : displayName;
                 };
 
@@ -109,7 +109,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                     <td
                       className="player-name-cell"
                       title={
-                        (item.name || "Jogador precisa logar").length > 30
+                        (item.name || "Jogador precisa logar").length > 20
                           ? item.name || "Jogador precisa logar"
                           : undefined
                       }
