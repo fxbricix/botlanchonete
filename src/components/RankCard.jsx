@@ -52,8 +52,6 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                 <th>Rank</th>
                 <th>Pts</th>
                 <th>K/D</th>
-                <th>HS%</th>
-                <th>MVP</th>
               </tr>
             </thead>
             <tbody>
@@ -141,8 +139,6 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                     </td>
                     <td>{item.Points}</td>
                     <td>{kdRatio}</td>
-                    <td>{hsPercentage}</td>
-                    <td>{mvpCount}</td>
                   </tr>
                 );
               })}
