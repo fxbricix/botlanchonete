@@ -62,8 +62,7 @@
 }
 
 .rank-card th:nth-child(3), .rank-card td:nth-child(3),
-.rank-card th:nth-child(4), .rank-card td:nth-child(4),
-.rank-card th:nth-child(5), .rank-card td:nth-child(5) {
+.rank-card th:nth-child(4), .rank-card td:nth-child(4) {
   text-align: center;
 }
 

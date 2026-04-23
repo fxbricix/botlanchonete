@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useRanksData } from "@/hooks/useRanksData.js";
-import {
-  calculateKD,
-  calculateHeadshotPercentage,
-  formatMVP,
-} from "@/utils/statsUtils.js";
+import { calculateKD } from "@/utils/statsUtils.js";
 
 /**
  * Componente para exibir tabela de ranques
@@ -49,7 +45,6 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
               <tr>
                 <th>#</th>
                 <th>Nome</th>
-                <th>Rank</th>
                 <th>Pts</th>
                 <th>K/D</th>
               </tr> 
@@ -57,13 +52,7 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
             <tbody>
               {currentRanks.map((item, idx) => {
                 const position = startIndex + idx + 1; // Posição real considerando a página
-                const isGlobalEliteTop = Number(item.Points) > 6000;
                 const kdRatio = calculateKD(item.Kills, item.Deaths);
-                const hsPercentage = calculateHeadshotPercentage(
-                  item.Kills,
-                  item.Headshots
-                );
-                const mvpCount = formatMVP(item.MVP);
 
                 // Função para determinar o estilo da posição
                 const getPositionStyle = (pos) => {
@@ -115,27 +104,6 @@ export function RankCard({ onPlayerSelect, selectedPlayer }) {
                       }
                     >
                       {truncateName(item.name)}
-                    </td>
-                    <td>
-                      {isGlobalEliteTop ? (
-                        <img
-                          src={"ranks/Global Elite Top.png"}
-                          alt="Global Elite Top"
-                          style={{ height: 24, verticalAlign: "middle" }}
-                          onError={(e) => {
-                            e.target.style.display = "none";
-                          }}
-                        />
-                      ) : item.Rank ? (
-                        <img
-                          src={`ranks/${item.Rank}.png`}
-                          alt={item.Rank}
-                          style={{ height: 24, verticalAlign: "middle" }}
-                          onError={(e) => {
-                            e.target.style.display = "none";
-                          }}
-                        />
-                      ) : null}
                     </td>
                     <td>{item.Points}</td>
                     <td>{kdRatio}</td>
