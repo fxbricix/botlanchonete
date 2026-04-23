@@ -76,25 +76,25 @@
 }
 
 .rank-card th:nth-child(2), .rank-card td:nth-child(2) { /* Nome */
-  width: 180px;
+  width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .rank-card th:nth-child(3), .rank-card td:nth-child(3) { /* Rank */
-  width: 80px;
+  width: 60px;
   text-align: center;
 }
 
 .rank-card th:nth-child(4), .rank-card td:nth-child(4) { /* Pontos */
-  width: 70px;
+  width: 60px;
   text-align: center;
   font-size: 0.8rem;
 }
 
 .rank-card th:nth-child(5), .rank-card td:nth-child(5) { /* K/D */
-  width: 60px;
+  width: 30px;
   text-align: center;
   font-size: 0.8rem;
 }
