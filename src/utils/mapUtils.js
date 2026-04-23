@@ -30,5 +30,5 @@ export function getMapImageUrl(mapName) {
     return `/botlanchonete/imgs/${withPrefix}`;
   }
 
-  return null;
+  return `/botlanchonete/imgs/not_found.png`;
 }
