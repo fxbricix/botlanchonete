@@ -40,7 +40,7 @@ export function ConnectSection({ serverData, loading, onRefresh }) {
           onClick={handleConnectSteam}
           title="Conectar diretamente via Steam"
         >
-          🎮 Conectar via Steam
+          🎮 CONECTAR
         </button>
 
         <button

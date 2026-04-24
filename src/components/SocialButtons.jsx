@@ -9,7 +9,7 @@ export function SocialButtons() {
   };
 
   const handleSkinsClick = () => {
-    window.open("https://lanchonetemix.ct.ws/", "_blank");
+    window.open("https://gone-relocate-equator.ngrok-free.dev/weaponpaints/", "_blank");
   };
 
   const handleLinkedInClick = () => {
@@ -34,7 +34,7 @@ export function SocialButtons() {
       <button
         className="skins-button"
         onClick={handleSkinsClick}
-        title="SKINS - CS Mix Lanches"
+        title="Painel de Skins"
       >
         SKINS
       </button>
