@@ -8,7 +8,7 @@ export async function playC4Sound() {
 
   try {
     const audio = new Audio(c4Sound);
-    audio.volume = 0.2; // Volume baixo (20%)
+    audio.volume = 0.08; // Volume baixo (8%)
 
     console.log("Tentando reproduzir áudio importado..."); // Debug
 
