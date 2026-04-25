@@ -91,17 +91,17 @@ export function HitboxCard({ selectedPlayer }) {
 
     if (Number.isNaN(parsedPoints)) return "0";
     if (parsedPoints <= 1500) return "0";
-    if (parsedPoints <= 1700) return "1";
-    if (parsedPoints <= 1900) return "2";
-    if (parsedPoints <= 2100) return "3";
-    if (parsedPoints <= 2500) return "4";
-    if (parsedPoints <= 3000) return "5";
-    if (parsedPoints <= 3500) return "6";
-    if (parsedPoints <= 5000) return "7";
-    if (parsedPoints <= 8000) return "8";
-    if (parsedPoints <= 11000) return "9";
-    if (parsedPoints <= 17000) return "10";
-    if (parsedPoints > 17000) return "challenger";
+    if (parsedPoints <= 2100) return "1";
+    if (parsedPoints <= 2800) return "2";
+    if (parsedPoints <= 3600) return "3";
+    if (parsedPoints <= 4500) return "4";
+    if (parsedPoints <= 5700) return "5";
+    if (parsedPoints <= 7200) return "6";
+    if (parsedPoints <= 9000) return "7";
+    if (parsedPoints <= 11500) return "8";
+    if (parsedPoints <= 15500) return "9";
+    if (parsedPoints <= 23000) return "10";
+    if (parsedPoints > 23000) return "challenger";
 
     return "0";
   };
@@ -390,6 +390,7 @@ export function HitboxCard({ selectedPlayer }) {
               <span className="stat-value">{firstblood}</span>
             </div>
             <div className="stat-item rank-item">
+              <span className="stat-label">Faceit</span>
               <div className="rank-image-container">
                 <img
                   src={`faceit/${getFaceitImageName(points)}.png`}
