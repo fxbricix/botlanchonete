@@ -799,10 +799,10 @@ body::after {
   color: #fff;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
   z-index: 5;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 1px 3px;
-  border-radius: 3px;
-  min-width: 20px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: auto;
   text-align: center;
 }
 
