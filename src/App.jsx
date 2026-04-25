@@ -3,12 +3,14 @@ import "./rankcard.css";
 import { ServerCard } from "./components/ServerCard";
 import { RankCard } from "./components/RankCard";
 import { HitboxCard } from "./components/HitboxCard";
+import { TeamDrawModal } from "./components/TeamDrawModal";
 
 /**
  * Componente principal da aplicação
  */
 function App() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [isTeamDrawOpen, setIsTeamDrawOpen] = useState(false);
 
   const handlePlayerSelect = (player) => {
     setSelectedPlayer(player);
@@ -16,6 +18,34 @@ function App() {
   return (
     <>
       <style>{`
+        .team-draw-open-btn {
+          position: fixed;
+          right: 20px;
+          bottom: 20px;
+          z-index: 1100;
+          border: 2px solid #ffd700;
+          background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+          color: #ffd700;
+          padding: 12px 18px;
+          border-radius: 12px;
+          font-family: "Poppins", sans-serif;
+          font-size: 0.92rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          cursor: pointer;
+          box-shadow: 0 8px 24px rgba(255, 215, 0, 0.25);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .team-draw-open-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 28px rgba(255, 215, 0, 0.35);
+        }
+
+        .team-draw-open-btn:active {
+          transform: translateY(0);
+        }
+
         .main-wrapper {
           display: flex;
           justify-content: center;
@@ -50,6 +80,13 @@ function App() {
         }
         
         @media (max-width: 768px) {
+          .team-draw-open-btn {
+            right: 10px;
+            bottom: 10px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+          }
+
           .main-wrapper {
             padding: 0.5rem !important;
           }
@@ -63,6 +100,14 @@ function App() {
         }
       `}</style>
       <div className="main-wrapper">
+        <button
+          type="button"
+          className="team-draw-open-btn"
+          onClick={() => setIsTeamDrawOpen(true)}
+        >
+          SORTEAR TIME
+        </button>
+
         <div
           className="app-container"
           style={{
@@ -106,6 +151,11 @@ function App() {
           </div>
         </div>
       </div>
+
+      <TeamDrawModal
+        isOpen={isTeamDrawOpen}
+        onClose={() => setIsTeamDrawOpen(false)}
+      />
     </>
   );
 }
