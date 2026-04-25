@@ -390,7 +390,6 @@ export function HitboxCard({ selectedPlayer }) {
               <span className="stat-value">{firstblood}</span>
             </div>
             <div className="stat-item rank-item">
-              <span className="stat-label">Faceit</span>
               <div className="rank-image-container">
                 <img
                   src={`faceit/${getFaceitImageName(points)}.png`}
