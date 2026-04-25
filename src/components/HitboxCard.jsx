@@ -53,7 +53,6 @@ export function HitboxCard({ selectedPlayer }) {
     RoundLose: round_lose = 0,
     BombPlanted: bomb_planted = 0,
     BombDefused: bomb_defused = 0,
-    Rank: rank,
     Points: points = 0,
     top_weapons = [],
   } = selectedPlayer;
@@ -174,8 +173,6 @@ export function HitboxCard({ selectedPlayer }) {
 
     return nameMap[weaponName] || weaponName.toUpperCase();
   };
-
-  const rankImageSrc = `ranks/${rank}.png`;
 
   return (
     <div className="hitbox-card">
@@ -389,21 +386,8 @@ export function HitboxCard({ selectedPlayer }) {
               <span className="stat-value">{bomb_defused}</span>
             </div>
             <div className="stat-item rank-item">
-              <span className="stat-label">Rank</span>
-              <div className="rank-image-container">
-                {rank && rank.trim() !== "" && rank.trim() !== "-" ? (
-                  <img
-                    src={rankImageSrc}
-                    alt={rank}
-                    className="rank-image"
-                    onError={(e) => {
-                      e.target.style.display = "none";
-                    }}
-                  />
-                ) : (
-                  <span className="stat-value">N/A</span>
-                )}
-              </div>
+              <span className="stat-label">Points</span>
+              <span className="stat-value">{points}</span>
             </div>
           </div>
 
