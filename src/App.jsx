@@ -4,6 +4,7 @@ import { ServerCard } from "./components/ServerCard";
 import { RankCard } from "./components/RankCard";
 import { HitboxCard } from "./components/HitboxCard";
 import { TeamDrawModal } from "./components/TeamDrawModal";
+import { MapDrawModal } from "./components/MapDrawModal";
 
 /**
  * Componente principal da aplicação
@@ -11,6 +12,7 @@ import { TeamDrawModal } from "./components/TeamDrawModal";
 function App() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isTeamDrawOpen, setIsTeamDrawOpen] = useState(false);
+  const [isMapDrawOpen, setIsMapDrawOpen] = useState(false);
 
   const handlePlayerSelect = (player) => {
     setSelectedPlayer(player);
@@ -44,6 +46,30 @@ function App() {
 
         .team-draw-open-btn:active {
           transform: translateY(0);
+        }
+
+        .map-draw-open-btn {
+          position: fixed;
+          right: 20px;
+          bottom: 76px;
+          z-index: 1100;
+          border: 2px solid #32cd32;
+          background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+          color: #32cd32;
+          padding: 12px 18px;
+          border-radius: 12px;
+          font-family: "Poppins", sans-serif;
+          font-size: 0.92rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          cursor: pointer;
+          box-shadow: 0 8px 24px rgba(50, 205, 50, 0.25);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .map-draw-open-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 28px rgba(50, 205, 50, 0.35);
         }
 
         .main-wrapper {
@@ -87,6 +113,13 @@ function App() {
             font-size: 0.82rem;
           }
 
+          .map-draw-open-btn {
+            right: 10px;
+            bottom: 58px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+          }
+
           .main-wrapper {
             padding: 0.5rem !important;
           }
@@ -102,8 +135,22 @@ function App() {
       <div className="main-wrapper">
         <button
           type="button"
+          className="map-draw-open-btn"
+          onClick={() => {
+            setIsTeamDrawOpen(false);
+            setIsMapDrawOpen(true);
+          }}
+        >
+          SORTEAR MAPA
+        </button>
+
+        <button
+          type="button"
           className="team-draw-open-btn"
-          onClick={() => setIsTeamDrawOpen(true)}
+          onClick={() => {
+            setIsMapDrawOpen(false);
+            setIsTeamDrawOpen(true);
+          }}
         >
           SORTEAR TIME
         </button>
@@ -155,6 +202,11 @@ function App() {
       <TeamDrawModal
         isOpen={isTeamDrawOpen}
         onClose={() => setIsTeamDrawOpen(false)}
+      />
+
+      <MapDrawModal
+        isOpen={isMapDrawOpen}
+        onClose={() => setIsMapDrawOpen(false)}
       />
     </>
   );

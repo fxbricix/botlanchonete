@@ -466,3 +466,34 @@
     width: 100%;
   }
 }
+
+.map-draw-result {
+  border: 1px solid rgba(50, 205, 50, 0.35);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.8rem;
+}
+
+.map-draw-result h3 {
+  margin: 0 0 0.6rem;
+  color: #ffd700;
+  text-align: center;
+}
+
+.map-draw-image {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+}
+
+.map-draw-no-image {
+  border: 1px dashed rgba(255, 215, 0, 0.4);
+  border-radius: 10px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
+}
