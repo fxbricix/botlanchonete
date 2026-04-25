@@ -86,6 +86,26 @@ export function HitboxCard({ selectedPlayer }) {
     return ((parseInt(round_win) / totalRounds) * 100).toFixed(1);
   };
 
+  const getFaceitImageName = (playerPoints) => {
+    const parsedPoints = Number(playerPoints);
+
+    if (Number.isNaN(parsedPoints)) return "0";
+    if (parsedPoints <= 1500) return "0";
+    if (parsedPoints <= 2100) return "1";
+    if (parsedPoints <= 2800) return "2";
+    if (parsedPoints <= 3600) return "3";
+    if (parsedPoints <= 4500) return "4";
+    if (parsedPoints <= 5700) return "5";
+    if (parsedPoints <= 7200) return "6";
+    if (parsedPoints <= 9000) return "7";
+    if (parsedPoints <= 11500) return "8";
+    if (parsedPoints <= 15500) return "9";
+    if (parsedPoints <= 23000) return "10";
+    if (parsedPoints > 23000) return "challenger";
+
+    return "0";
+  };
+
   // Função para mapear nomes de armas da API para nomes dos arquivos SVG
   const getWeaponIcon = (weaponName) => {
     const weaponMap = {
@@ -369,9 +389,18 @@ export function HitboxCard({ selectedPlayer }) {
               <span className="stat-label">First Blood</span>
               <span className="stat-value">{firstblood}</span>
             </div>
-            <div className="stat-item">
-              <span className="stat-label">Rounds Total</span>
-              <span className="stat-value">{rounds_overall}</span>
+            <div className="stat-item rank-item">
+              <span className="stat-label">Faceit</span>
+              <div className="rank-image-container">
+                <img
+                  src={`faceit/${getFaceitImageName(points)}.png`}
+                  alt={`Faceit ${getFaceitImageName(points)}`}
+                  className="rank-image"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
             </div>
             <div className="stat-item">
               <span className="stat-label">Round Win %</span>
