@@ -492,7 +492,7 @@ body::after {
   align-items: center;
 }
 
-/* Container para DISCORD - SKINS - LINKEDIN */
+/* Container para DISCORD - SKINS */
 .skins-button-container {
   display: flex;
   justify-content: space-between;
@@ -524,29 +524,6 @@ body::after {
   transform: translateY(-3px);
 }
 
-/* Botão LinkedIn - Último da linha */
-.linkedin-button {
-  background: linear-gradient(145deg, #0077b5, #005885);
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  flex-shrink: 0;
-}
-
-.linkedin-button:hover {
-  background: linear-gradient(145deg, #005885, #004a6b);
-  box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
-  transform: translateY(-3px);
-}
-
 /* Botão SKINS - Centro da linha */
 .skins-button {
   background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b, #eb4d4b, #6c5ce7);
@@ -568,13 +545,11 @@ body::after {
 }
 
 /* Efeitos visuais dos botões sociais */
-.discord-button svg,
-.linkedin-button svg {
+.discord-button svg {
   transition: transform 0.3s ease;
 }
 
-.discord-button:hover svg,
-.linkedin-button:hover svg {
+.discord-button:hover svg {
   transform: scale(1.1);
 }
 
@@ -699,8 +674,7 @@ body::after {
     align-items: center;
   }
 
-  .discord-button,
-  .linkedin-button {
+  .discord-button {
     width: 40px;
     height: 40px;
   }
