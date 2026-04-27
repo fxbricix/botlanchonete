@@ -61,6 +61,8 @@ export function ServerCard() {
         />
 
         <SocialButtons />
+
+        <p className="nonprofit-message">Projeto sem fins lucrativos por drosin</p>
       </div>
     </div>
   );
