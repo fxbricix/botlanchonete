@@ -1,6 +1,6 @@
 {
   "name": "lanchonete-server-tracker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "homepage": "https://fxbricix.github.io/botlanchonete",
   "scripts": {
