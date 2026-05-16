@@ -8,6 +8,7 @@ export const config = {
   TRACK_INTERVAL_SEC: import.meta.env.VITE_TRACK_INTERVAL_SEC || 30,
   SERVER_IP: import.meta.env.VITE_SERVER_IP || "lanches.dat.gg:26088",
   PLAYER_API_URL: import.meta.env.VITE_PLAYER_API_URL || "https://api-tabela-mixlanches.onrender.com/",
+  LAST_MATCHES_HOST: import.meta.env.VITE_LAST_MATCHES_HOST || "",
 };
 
 /**

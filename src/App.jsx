@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import packageJson from "../package.json";
 import "./rankcard.css";
 import { ServerCard } from "./components/ServerCard";
 import { RankCard } from "./components/RankCard";
 import { HitboxCard } from "./components/HitboxCard";
 import { TeamDrawModal } from "./components/TeamDrawModal";
 import { MapDrawModal } from "./components/MapDrawModal";
+import { LastMatchesCard } from "./components/LastMatchesCard";
 
 /**
  * Componente principal da aplicação
@@ -74,12 +76,30 @@ function App() {
 
         .main-wrapper {
           display: flex;
+          flex-direction: column;
           justify-content: center;
-          align-items: flex-start;
+          align-items: center;
           min-height: 100vh;
           padding: 2rem;
           overflow-x: hidden;
           overflow-y: auto;
+          gap: 2rem;
+        }
+
+        .app-version-badge {
+          position: fixed;
+          left: 16px;
+          bottom: 16px;
+          z-index: 1300;
+          background: rgba(0, 0, 0, 0.45);
+          border: 1px solid rgba(50, 205, 50, 0.18);
+          border-radius: 999px;
+          color: #fff;
+          padding: 0.4rem 0.9rem;
+          font-size: 0.82rem;
+          font-family: "Poppins", sans-serif;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+          backdrop-filter: blur(10px);
         }
         
         @media (max-width: 1350px) {
@@ -197,7 +217,13 @@ function App() {
             />
           </div>
         </div>
+
+        <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "2rem" }}>
+          <LastMatchesCard />
+        </div>
       </div>
+
+      <div className="app-version-badge">v{packageJson.version}</div>
 
       <TeamDrawModal
         isOpen={isTeamDrawOpen}
