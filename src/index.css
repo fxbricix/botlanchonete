@@ -1214,23 +1214,20 @@ body::after {
   body::-webkit-scrollbar-thumb {
     background: transparent;
   }
+}
 
-    border-radius: 4px;
-  }
-  
-  .main-wrapper {
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
-  }
-  
-  /* Adiciona padding bottom para evitar que o conteúdo seja cortado */
-  .app-container {
-    padding-bottom: 2rem;
-  }
-  
-  /* Melhora a rolagem em touch devices */
-  .server-card, .rank-card, .hitbox-card {
-    -webkit-overflow-scrolling: touch;
-  }
+.main-wrapper {
+  min-height: 100vh;
+  height: auto;
+  overflow: visible;
+}
+
+/* Adiciona padding bottom para evitar que o conteúdo seja cortado */
+.app-container {
+  padding-bottom: 2rem;
+}
+
+/* Melhora a rolagem em touch devices */
+.server-card, .rank-card, .hitbox-card {
+  -webkit-overflow-scrolling: touch;
 }
