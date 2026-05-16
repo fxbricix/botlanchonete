@@ -73,6 +73,10 @@ export function LastMatchesSection() {
     return null;
   }
 
+  if (error || !hasMatches) {
+    return null;
+  }
+
   return (
     <section className="last-matches-section">
       <div className="last-matches-grid">
