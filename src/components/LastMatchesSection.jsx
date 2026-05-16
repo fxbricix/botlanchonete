@@ -49,14 +49,6 @@ export function LastMatchesSection() {
       .sort((a, b) => Number(b.matchId) - Number(a.matchId));
   }, [lastMatches]);
 
-  console.debug("LastMatchesSection state:", {
-    loading,
-    error,
-    lastMatches,
-    matchesCount: matches.length,
-    matchesSample: matches.slice(0, 2),
-  });
-
   const hasMatches = matches.length > 0 && !error;
 
   const selectedMatch = useMemo(
@@ -70,11 +62,11 @@ export function LastMatchesSection() {
   );
 
   if (loading) {
-    return null;
+    return "Carregando";
   }
 
   if (error || !hasMatches) {
-    return null;
+    return "Falha ao encontrar partidas recentes";
   }
 
   return (
