@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import packageJson from "../package.json";
 import "./rankcard.css";
 import { ServerCard } from "./components/ServerCard";
 import { RankCard } from "./components/RankCard";
@@ -83,6 +84,22 @@ function App() {
           overflow-x: hidden;
           overflow-y: auto;
           gap: 2rem;
+        }
+
+        .app-version-badge {
+          position: fixed;
+          left: 16px;
+          bottom: 16px;
+          z-index: 1300;
+          background: rgba(0, 0, 0, 0.45);
+          border: 1px solid rgba(50, 205, 50, 0.18);
+          border-radius: 999px;
+          color: #fff;
+          padding: 0.4rem 0.9rem;
+          font-size: 0.82rem;
+          font-family: "Poppins", sans-serif;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+          backdrop-filter: blur(10px);
         }
         
         @media (max-width: 1350px) {
@@ -205,6 +222,8 @@ function App() {
           <LastMatchesCard />
         </div>
       </div>
+
+      <div className="app-version-badge">v{packageJson.version}</div>
 
       <TeamDrawModal
         isOpen={isTeamDrawOpen}
