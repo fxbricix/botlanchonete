@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useLastMatchesData } from "../hooks/useLastMatchesData.js";
+import { calculateKD, calculateHeadshotPercentage } from "../utils/statsUtils.js";
 
 function groupByTeam(records = []) {
   return records.reduce((acc, record) => {
@@ -24,7 +25,7 @@ function getMatchTitle(groups) {
 }
 
 function formatTeamLabel(teamName) {
-  return String(teamName)
+  return String("TIME " + teamName)
     .replace(/team_/gi, "")
     .replace(/_/g, " ")
     .trim()
@@ -40,10 +41,12 @@ export function LastMatchesSection() {
       return [];
     }
 
-    return Object.entries(lastMatches).map(([matchId, payload]) => ({
-      matchId,
-      records: Array.isArray(payload?.records) ? payload.records : [],
-    }));
+    return Object.entries(lastMatches)
+      .map(([matchId, payload]) => ({
+        matchId,
+        records: Array.isArray(payload?.records) ? payload.records : [],
+      }))
+      .sort((a, b) => Number(b.matchId) - Number(a.matchId));
   }, [lastMatches]);
 
   console.debug("LastMatchesSection state:", {
@@ -105,8 +108,6 @@ export function LastMatchesSection() {
               Fechar
             </button>
 
-            <h2>{getMatchTitle(selectedMatchGroups)}</h2>
-
             {Object.entries(selectedMatchGroups).map(([teamName, records]) => (
               <div key={teamName} className="last-match-team-block">
                 <h3>{formatTeamLabel(teamName)}</h3>
@@ -117,11 +118,12 @@ export function LastMatchesSection() {
                         <th>Jogador</th>
                         <th>Kills</th>
                         <th>Deaths</th>
+                        <th>KD</th>
                         <th>Damage</th>
                         <th>Assists</th>
-                        <th>Headshots</th>
-                        <th>Utility</th>
-                        <th>Flashes</th>
+                        <th>HS%</th>
+                        <th>Utility Damage</th>
+                        <th>Flashed Enemies</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -130,9 +132,10 @@ export function LastMatchesSection() {
                           <td>{record.name || "—"}</td>
                           <td>{record.kills || "0"}</td>
                           <td>{record.deaths || "0"}</td>
+                          <td>{calculateKD(Number(record.kills), Number(record.deaths))}</td>
                           <td>{record.damage || "0"}</td>
                           <td>{record.assists || "0"}</td>
-                          <td>{record.head_shot_kills || "0"}</td>
+                          <td>{calculateHeadshotPercentage(Number(record.kills), Number(record.head_shot_kills))}</td>
                           <td>{record.utility_damage || "0"}</td>
                           <td>{record.enemies_flashed || "0"}</td>
                         </tr>
