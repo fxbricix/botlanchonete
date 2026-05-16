@@ -15,6 +15,7 @@ function App() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isTeamDrawOpen, setIsTeamDrawOpen] = useState(false);
   const [isMapDrawOpen, setIsMapDrawOpen] = useState(false);
+  const [isLastMatchesOpen, setIsLastMatchesOpen] = useState(false);
 
   const handlePlayerSelect = (player) => {
     setSelectedPlayer(player);
@@ -72,6 +73,30 @@ function App() {
         .map-draw-open-btn:hover {
           transform: translateY(-2px);
           box-shadow: 0 10px 28px rgba(50, 205, 50, 0.35);
+        }
+
+        .recent-matches-open-btn {
+          position: fixed;
+          right: 20px;
+          bottom: 132px;
+          z-index: 1100;
+          border: 2px solid #ffa500;
+          background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+          color: #ffa500;
+          padding: 12px 18px;
+          border-radius: 12px;
+          font-family: "Poppins", sans-serif;
+          font-size: 0.92rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          cursor: pointer;
+          box-shadow: 0 8px 24px rgba(255, 165, 0, 0.25);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .recent-matches-open-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 28px rgba(255, 165, 0, 0.35);
         }
 
         .main-wrapper {
@@ -140,6 +165,13 @@ function App() {
             font-size: 0.82rem;
           }
 
+          .recent-matches-open-btn {
+            right: 10px;
+            bottom: 106px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+          }
+
           .main-wrapper {
             padding: 0.5rem !important;
           }
@@ -169,10 +201,23 @@ function App() {
           className="team-draw-open-btn"
           onClick={() => {
             setIsMapDrawOpen(false);
+            setIsLastMatchesOpen(false);
             setIsTeamDrawOpen(true);
           }}
         >
           SORTEAR TIME
+        </button>
+
+        <button
+          type="button"
+          className="recent-matches-open-btn"
+          onClick={() => {
+            setIsTeamDrawOpen(false);
+            setIsMapDrawOpen(false);
+            setIsLastMatchesOpen(true);
+          }}
+        >
+          PARTIDAS RECENTES
         </button>
 
         <div
@@ -218,10 +263,12 @@ function App() {
           </div>
         </div>
 
-        <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "2rem" }}>
-          <LastMatchesCard />
-        </div>
       </div>
+
+      <LastMatchesCard
+        isOpen={isLastMatchesOpen}
+        onClose={() => setIsLastMatchesOpen(false)}
+      />
 
       <div className="app-version-badge">v{packageJson.version}</div>
 
