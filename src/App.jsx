@@ -5,6 +5,7 @@ import { RankCard } from "./components/RankCard";
 import { HitboxCard } from "./components/HitboxCard";
 import { TeamDrawModal } from "./components/TeamDrawModal";
 import { MapDrawModal } from "./components/MapDrawModal";
+import { LastMatchesCard } from "./components/LastMatchesCard";
 
 /**
  * Componente principal da aplicação
@@ -74,12 +75,14 @@ function App() {
 
         .main-wrapper {
           display: flex;
+          flex-direction: column;
           justify-content: center;
-          align-items: flex-start;
+          align-items: center;
           min-height: 100vh;
           padding: 2rem;
           overflow-x: hidden;
           overflow-y: auto;
+          gap: 2rem;
         }
         
         @media (max-width: 1350px) {
@@ -196,6 +199,10 @@ function App() {
               selectedPlayer={selectedPlayer}
             />
           </div>
+        </div>
+
+        <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "2rem" }}>
+          <LastMatchesCard />
         </div>
       </div>
 

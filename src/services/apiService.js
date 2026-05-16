@@ -77,3 +77,40 @@ export async function fetchRanksData() {
     throw new Error(`Resposta inválida da API: ${e.message} - ${cleanText}`);
   }
 }
+
+/**
+ * Busca as últimas partidas usando host configurado no .env
+ * @returns {Promise<Object>} Últimas partidas agrupadas por matchid
+ */
+export async function fetchLastMatches() {
+  const host = config.LAST_MATCHES_HOST;
+  if (!host) {
+    throw new Error("VITE_LAST_MATCHES_HOST não configurado");
+  }
+
+  const url = new URL("/last-matches", host);
+  url.searchParams.set("quantidade", "5");
+
+  const response = await fetch(url.toString(), {
+    method: "GET",
+    mode: "cors",
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
+  }
+
+  // Ler como texto e tentar parse robusto (algumas APIs retornam prefixo inesperado)
+  const text = await response.text();
+  try {
+    const jsonStart = text.indexOf("{");
+    const cleanText = jsonStart >= 0 ? text.slice(jsonStart) : text;
+    const data = JSON.parse(cleanText);
+    return data;
+  } catch (e) {
+    // Logar conteúdo para diagnóstico
+    console.error("fetchLastMatches: falha ao parsear JSON:", e, "raw:", text);
+    throw new Error(`Resposta inválida de last-matches: ${e.message}`);
+  }
+}
