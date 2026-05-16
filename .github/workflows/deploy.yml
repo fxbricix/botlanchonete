@@ -38,6 +38,7 @@ jobs:
           VITE_TRACK_SERVER_ID: ${{ secrets.VITE_TRACK_SERVER_ID }}
           VITE_TRACK_INTERVAL_SEC: ${{ secrets.VITE_TRACK_INTERVAL_SEC }}
           VITE_SERVER_IP: ${{ secrets.VITE_SERVER_IP }}
+          VITE_LAST_MATCHES_HOST: ${{ secrets.VITE_LAST_MATCHES_HOST }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
