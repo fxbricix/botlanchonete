@@ -1197,22 +1197,24 @@ body::after {
   body {
     -webkit-overflow-scrolling: touch;
     overflow-y: auto;
-    /* No mobile, mostra a barra de rolagem para melhor UX */
-    scrollbar-width: auto;
-    -ms-overflow-style: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
   
   body::-webkit-scrollbar {
-    display: block;
-    width: 8px;
+    width: 0;
+    height: 0;
+    display: none;
   }
   
   body::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: transparent;
   }
   
   body::-webkit-scrollbar-thumb {
-    background: rgba(255, 215, 0, 0.5);
+    background: transparent;
+  }
+
     border-radius: 4px;
   }
   
