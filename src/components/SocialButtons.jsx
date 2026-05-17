@@ -66,7 +66,7 @@ export function SocialButtons() {
             <h3>Você será redirecionado</h3>
             <p>
               Utilizamos ngrok para hostear o painel de skins,
-              <strong className="skins-visit-site"> clique em Visit Site</strong>
+              <strong className="skins-visit-site"> clique em Visit Site </strong>
               após ser redirecionado.
             </p>
             <button
