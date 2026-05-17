@@ -62,11 +62,31 @@ export function LastMatchesSection() {
   );
 
   if (loading) {
-    return "Carregando";
+    return (
+      <section className="last-matches-section">
+        <div className="last-matches-state last-matches-loading">
+          <span className="last-matches-spinner" aria-hidden="true" />
+          <div>
+            <strong>Carregando partidas recentes...</strong>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   if (error || !hasMatches) {
-    return "Falha ao encontrar partidas recentes";
+    return (
+      <section className="last-matches-section">
+        <div className="last-matches-state last-matches-error">
+          <div className="last-matches-error-icon">⚠️</div>
+          <div>
+            <h3>Não foi possível carregar as partidas</h3>
+            <p>{error ? error : "Nenhuma partida recente encontrada."}</p>
+            <small>Verifique sua conexão ou tente novamente em alguns instantes.</small>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (

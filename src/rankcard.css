@@ -360,6 +360,79 @@
   padding: 1rem 1rem 2rem;
 }
 
+.last-matches-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 220px;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  border-radius: 18px;
+  background: rgba(12, 12, 12, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.last-matches-loading {
+  color: #d8ffd8;
+}
+
+.last-matches-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgba(255, 255, 255, 0.14);
+  border-top-color: #32cd32;
+  border-radius: 50%;
+  animation: last-matches-spin 1s linear infinite;
+}
+
+@keyframes last-matches-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.last-matches-error {
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  background: linear-gradient(145deg, rgba(40, 10, 10, 0.95), rgba(65, 5, 5, 0.92));
+  color: #ffcdcd;
+}
+
+.last-matches-error-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: rgba(255, 80, 80, 0.18);
+  color: #ff9b9b;
+  font-size: 1.7rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.last-matches-error h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #ffd36f;
+}
+
+.last-matches-error p {
+  margin: 0.35rem 0 0;
+  line-height: 1.5;
+}
+
+.last-matches-error small {
+  display: block;
+  margin-top: 0.75rem;
+  color: #f0b0b0;
+}
+
+}
+
 .last-matches-card {
   display: inline-block;
   width: auto;
