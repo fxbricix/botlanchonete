@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 /**
  * Componente para botões de redes sociais
  */
 export function SocialButtons() {
+  const [showSkinsModal, setShowSkinsModal] = useState(false);
+  const redirectTimer = useRef(null);
+  const redirectWindow = useRef(null);
+  const skinsUrl = "https://gone-relocate-equator.ngrok-free.dev/weaponpaints/";
+
   const handleDiscordClick = () => {
     window.open("https://discord.gg/tmyz4wp88W", "_blank");
   };
 
   const handleSkinsClick = () => {
-    window.open("https://gone-relocate-equator.ngrok-free.dev/weaponpaints/", "_blank");
+    setShowSkinsModal(true);
+    redirectWindow.current = window.open("about:blank", "_blank");
+
+    redirectTimer.current = window.setTimeout(() => {
+      if (redirectWindow.current) {
+        redirectWindow.current.location.href = skinsUrl;
+      } else {
+        window.open(skinsUrl, "_blank");
+      }
+    }, 3000);
   };
+
+  const closeSkinsModal = () => {
+    setShowSkinsModal(false);
+    if (redirectTimer.current) {
+      clearTimeout(redirectTimer.current);
+      redirectTimer.current = null;
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (redirectTimer.current) {
+        clearTimeout(redirectTimer.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="skins-button-container">
@@ -31,6 +61,29 @@ export function SocialButtons() {
       >
         SKINS
       </button>
+
+      {showSkinsModal && (
+        <div className="skins-redirect-overlay" onClick={closeSkinsModal}>
+          <div
+            className="skins-redirect-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h3>Você será redirecionado</h3>
+            <p>
+              Utilizamos ngrok para hostear o painel de skins,
+              <strong className="skins-visit-site"> clique em Visit Site</strong>
+              após ser redirecionado.
+            </p>
+            <button
+              type="button"
+              className="skins-redirect-close"
+              onClick={closeSkinsModal}
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
