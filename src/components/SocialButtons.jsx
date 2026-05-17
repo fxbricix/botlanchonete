@@ -6,7 +6,6 @@ import React, { useEffect, useRef, useState } from "react";
 export function SocialButtons() {
   const [showSkinsModal, setShowSkinsModal] = useState(false);
   const redirectTimer = useRef(null);
-  const redirectWindow = useRef(null);
   const skinsUrl = "https://gone-relocate-equator.ngrok-free.dev/weaponpaints/";
 
   const handleDiscordClick = () => {
@@ -15,14 +14,10 @@ export function SocialButtons() {
 
   const handleSkinsClick = () => {
     setShowSkinsModal(true);
-    redirectWindow.current = window.open("about:blank", "_blank");
 
     redirectTimer.current = window.setTimeout(() => {
-      if (redirectWindow.current) {
-        redirectWindow.current.location.href = skinsUrl;
-      } else {
-        window.open(skinsUrl, "_blank");
-      }
+      window.open(skinsUrl, "_blank");
+      setShowSkinsModal(false);
     }, 3000);
   };
 
